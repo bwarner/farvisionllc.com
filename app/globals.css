@@ -1,108 +1,80 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+h1,
+.tagline {
+  font-family: var(--font-antonio), sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-jost), sans-serif;
+  background-color: #24243B;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.container {
+  max-width: 800px;
+  padding: 20px;
 }
 
-h1 {
-  @apply text-4xl font-bold;
+.logo {
+  /* width: 150px; */
+  margin-bottom: 20px;
 }
 
-/* #sidebar nav a {
-  transition: color 0.2s ease;
-  border: 0;
-  color: rgba(255, 255, 255, 0.35);
-  display: block;
-  font-size: 0.6em;
-  font-weight: bold;
-  letter-spacing: 0.25em;
-  line-height: 1.75;
-  outline: 0;
-  padding: 1.35em 0;
-  position: relative;
+.tagline {
+  font-family: 'Antonio', sans-serif;
+  font-size: 2em;
+  margin: 0;
+  color: #FBA900;
+}
+
+.message {
+  font-size: 1.2em;
+  margin: 20px 0;
+}
+
+.contact-info {
+  margin: 20px 0;
+}
+
+.contact-info a {
+  color: #FBA900;
   text-decoration: none;
-  text-transform: uppercase;
-} */
-
-#sidebar nav a:before,
-#sidebar nav a:after {
-  border-radius: 0.2em;
-  bottom: 0;
-  content: '';
-  height: 0.2em;
-  position: absolute;
-  right: 0;
-  width: 100%;
 }
 
-#sidebar nav a:before {
-  background: #3c2c62;
+.contact-info a:hover {
+  text-decoration: underline;
 }
 
-#sidebar nav a:after {
-  background-image: -moz-linear-gradient(to right, #5e42a6, #b74e91);
-  background-image: -webkit-linear-gradient(to right, #5e42a6, #b74e91);
-  background-image: -ms-linear-gradient(to right, #5e42a6, #b74e91);
-  background-image: linear-gradient(to right, #5e42a6, #b74e91);
-  -moz-transition: max-width 0.2s ease;
-  -webkit-transition: max-width 0.2s ease;
-  -ms-transition: max-width 0.2s ease;
-  transition: max-width 0.2s ease;
-  max-width: 0;
+.notify-button {
+  background-color: #FBA900;
+  color: #24243B;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-family: 'Jost', sans-serif;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
-#sidebar nav a:hover {
-  color: rgba(255, 255, 255, 0.55);
+.notify-button:hover {
+  background-color: #e09a00;
 }
 
-#sidebar nav a:active {
-  color: #ffffff;
-  border: 2px solid #ffffff;
+footer {
+  margin-top: 40px;
 }
 
-#sidebar nav a:visited {
-  color: #ffffff;
-  border: 2px solid #ffffff;
-}
-
-#sidebar nav a.active:after {
-  max-width: 100%;
-}
-
-@media screen and (max-width: 1280px) {
-  #sidebar nav a {
-    height: inherit;
-    line-height: inherit;
-    padding: 0;
-  }
-
-  #sidebar nav a:after {
-    background-image: none;
-    background-color: #b74e91;
-  }
+footer p {
+  font-size: 0.8em;
+  margin: 0;
+  background: linear-gradient(to right, #FFFFFF, #FBA900);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
