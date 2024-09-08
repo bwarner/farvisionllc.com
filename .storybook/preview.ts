@@ -23,7 +23,7 @@ const preview: Preview = {
         ...CustomViewports,
         ...MINIMAL_VIEWPORTS,
       },
-      defaultViewport: "mobile1",
+      defaultViewport: "Desktop",
     },
     controls: {
       matchers: {

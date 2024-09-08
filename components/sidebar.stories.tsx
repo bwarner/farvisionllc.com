@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Intro from "./intro";
+import Sidebar from "./sidebar";
 
 const meta = {
-  title: "Components/Intro",
-  component: Intro,
+  title: "Components/Sidebar",
+  component: Sidebar,
   parameters: {
     layout: "centered",
     nextjs: {
@@ -17,11 +17,11 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Intro>;
+} satisfies Meta<typeof Sidebar>;
 
 export default meta;
 
-type Story = StoryObj<typeof Intro>;
+type Story = StoryObj<typeof Sidebar>;
 
 export const Default: Story = {
   args: {

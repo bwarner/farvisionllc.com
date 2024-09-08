@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import clsx from "clsx";
 import { Inter } from "next/font/google";
+import PageLoadAnimation from "@/components/page-load";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,7 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={inter.className}>
+      <body
+        suppressHydrationWarning={true}
+        className={clsx(inter.className, "is-preload")}
+      >
+        <PageLoadAnimation />
         {children}
       </body>
     </html>

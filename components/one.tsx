@@ -1,43 +1,60 @@
 import React from "react";
-import Spotlight from "./spotlight";
-import clsx from "clsx";
 
-interface SpotlightsProps {
-  className?: string;
-}
+const SpotlightSection = ({
+  imageSrc,
+  imageAlt,
+  dataPosition,
+  title,
+  description,
+  link,
+}) => (
+  <section>
+    <a href={link} className="image">
+      <img src={imageSrc} alt={imageAlt} data-position={dataPosition} />
+    </a>
+    <div className="content">
+      <div className="inner">
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <ul className="actions">
+          <li>
+            <a href={link} className="button">
+              Learn more
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+);
 
-const Spotlights: React.FC<SpotlightsProps> = ({ className }) => {
-  return (
-    <section id="one" className={clsx("wrapper style2 spotlights", className)}>
-      <Spotlight
-        imageSrc="/images/pic01.jpg"
-        imageAlt="Picture 1"
-        title="Sed ipsum dolor"
-        description="Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus."
-        link="generic.html"
-        imagePosition="center center"
-        className="flex flex-row h-[22.5em]"
-      />
-      <Spotlight
-        imageSrc="/images/pic02.jpg"
-        imageAlt="Picture 2"
-        title="Feugiat consequat"
-        description="Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus."
-        link="generic.html"
-        imagePosition="top center"
-        className="flex flex-row h-[22.5em]"
-      />
-      <Spotlight
-        imageSrc="/images/pic03.jpg"
-        imageAlt="Picture 3"
-        title="Ultricies aliquam"
-        description="Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus."
-        link="generic.html"
-        imagePosition="25% 25%"
-        className="flex flex-row h-[22.5em]"
-      />
-    </section>
-  );
-};
+const Spotlights = () => (
+  <section id="one" className="wrapper style2 spotlights">
+    <SpotlightSection
+      imageSrc="images/pic01.jpg"
+      imageAlt=""
+      dataPosition="center center"
+      title="Sed ipsum dolor"
+      description="Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus."
+      link="generic.html"
+    />
+    <SpotlightSection
+      imageSrc="images/pic02.jpg"
+      imageAlt=""
+      dataPosition="top center"
+      title="Feugiat consequat"
+      description="Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus."
+      link="generic.html"
+    />
+    <SpotlightSection
+      imageSrc="images/pic03.jpg"
+      imageAlt=""
+      dataPosition="25% 25%"
+      title="Ultricies aliquam"
+      description="Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus."
+      link="generic.html"
+    />
+  </section>
+);
 
 export default Spotlights;
