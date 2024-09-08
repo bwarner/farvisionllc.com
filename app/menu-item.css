@@ -1,0 +1,57 @@
+.menu-item-anchor:before,
+.menu-item-anchor:after {
+  border-radius: 0.2em;
+  bottom: 0;
+  content: '';
+  height: 0.2em;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+
+.menu-item-anchor:before {
+  background: #3c2c62;
+}
+
+.menu-item-anchor:after {
+  background-image: -moz-linear-gradient(to right, #5e42a6, #b74e91);
+  background-image: -webkit-linear-gradient(to right, #5e42a6, #b74e91);
+  background-image: -ms-linear-gradient(to right, #5e42a6, #b74e91);
+  background-image: linear-gradient(to right, #5e42a6, #b74e91);
+  -moz-transition: max-width 0.2s ease;
+  -webkit-transition: max-width 0.2s ease;
+  -ms-transition: max-width 0.2s ease;
+  transition: max-width 0.2s ease;
+  max-width: 0;
+}
+
+.menu-item-anchor:hover {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.menu-item-anchor:active {
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.menu-item-anchor:visited {
+  color: #ffffff;
+  border: 2px solid #ffffff;
+}
+
+.menu-item-anchor.active:after {
+  max-width: 100%;
+}
+
+@media screen and (max-width: 1280px) {
+  .menu-item-anchor {
+    height: inherit;
+    line-height: inherit;
+    padding: 0;
+  }
+
+  .menu-item-anchor:after {
+    background-image: none;
+    background-color: #b74e91;
+  }
+}

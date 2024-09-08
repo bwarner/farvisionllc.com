@@ -6,18 +6,20 @@ interface IntroSectionProps {
   className?: string;
 }
 
+const buttonClassNames = `button`;
+
 const IntroSection: React.FC<IntroSectionProps> = ({ className }) => {
   return (
     <section
       id="intro"
       className={classNames(
-        "wrapper style1 fullscreen fade-up bg-purple-800 text-white",
+        "wrapper style1 fullscreen fade-up bg-purple-800 text-white bg-intro bg-right-top bg-fixed bg-no-repeat bg-cover",
         className
       )}
     >
-      <div className="inner text-center">
-        <h1>Hyperspace</h1>
-        <p>
+      <div className="inner pt-16 pr-16 pl-16 pb-8 text-center">
+        <h1 className="text-5xl leading-6 font-bold mb-2">Hyperspace</h1>
+        <p className="text-xl mb-8">
           Just another fine responsive site template designed by{" "}
           <a href="http://html5up.net" className="text-blue-300 underline">
             HTML5 UP
@@ -32,12 +34,9 @@ const IntroSection: React.FC<IntroSectionProps> = ({ className }) => {
           </a>
           .
         </p>
-        <ul className="actions justify-center mt-4">
-          <li>
-            <a
-              href="#one"
-              className="button scrolly flex items-center justify-center bg-white text-purple-800 py-3 px-6 rounded-full"
-            >
+        <ul className="actions flex cursor-default list-none -ml-4 justify-center">
+          <li className="appearance-none pr-4 align-middle">
+            <a href="#one" className={buttonClassNames}>
               <FaArrowDown className="mr-2 text-base" />
               Learn more
             </a>

@@ -6,14 +6,24 @@ import {
   MINIMAL_VIEWPORTS,
 } from "@storybook/addon-viewport";
 
+const CustomViewports = {
+  desktop: {
+    name: "Desktop",
+    styles: {
+      width: "1440px",
+      height: "1024px",
+    },
+  },
+};
+
 const preview: Preview = {
   parameters: {
     viewport: {
       viewports: {
-        ...INITIAL_VIEWPORTS,
+        ...CustomViewports,
         ...MINIMAL_VIEWPORTS,
       },
-      defaultViewport: "responsive",
+      defaultViewport: "mobile1",
     },
     controls: {
       matchers: {
@@ -23,6 +33,7 @@ const preview: Preview = {
     },
   },
 };
-console.log("INITIAL_VIEWPORTS: ", INITIAL_VIEWPORTS);
-console.log("preview.ts: ", preview);
+
+console.log("preview ", preview);
+
 export default preview;

@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Nav from "./nav";
-import { deflate } from "zlib";
+import Intro from "./intro";
 
 const meta = {
-  title: "Components/Nav",
-  component: Nav,
+  title: "Components/Intro",
+  component: Intro,
   parameters: {
     layout: "centered",
     nextjs: {
@@ -18,13 +17,13 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Nav>;
+} satisfies Meta<typeof Intro>;
 
 export default meta;
 
-type Story = StoryObj<typeof Nav>;
+type Story = StoryObj<typeof Intro>;
 
-export const SideNav: Story = {
+export const Default: Story = {
   args: {
     className: "",
   },

@@ -9,9 +9,9 @@ interface NavProps {
 }
 
 const linkClassNames =
-  "first:mt-0 w-full text-right transform translate-y-0 transition-opacity transition-transform duration-150 ease-linear opacity-100 p-0 relative";
+  "first:ml-0 ml-7 w-all md:h-full text-right transform translate-y-0 transition-opacity transition-transform duration-150 ease-linear opacity-100 p-0 relative";
 const anchorClassNames =
-  "font-bold text-xs leading-relaxed tracking-widest uppercase text-[rgba(255,255,255,0.35)] py-5 block relative transition-colors duration-200 ease-linear border-0 hover:text-white/0.55";
+  "font-bold text-xs md:h-full leading-relaxed tracking-widest uppercase text-[rgba(255,255,255,0.35)] py-5 block relative transition-colors duration-200 ease-linear border-0 hover:text-white/0.55";
 const menuItems = [
   { id: "#intro", name: "Welcome" },
   { id: "#one", name: "Who we are" },
@@ -20,10 +20,9 @@ const menuItems = [
 ];
 const sidebarClassNames = (className?: string) => {
   const classNames = clsx(
-    "h-full text-xs lg:p-[2.5em] pt-[0.5em] bg-[#312450] cursor-default overflow-x-hidden overflow-y-auto text-right top-0  z-[10000] md:line-height-[3.5em] md:overflow-hidden md:p-0 md:text-center",
+    "h-full md:h-12 lg:h-full text-xs md:p-0 lg:p-[2.5em] pt-[0.5em] bg-[#312450] cursor-default overflow-x-hidden overflow-y-auto text-right top-0  z-[10000] md:line-height-[3.5em] md:overflow-hidden md:text-center",
     className
   );
-  console.log("sidebarClassNames", classNames);
   return classNames;
 };
 //"min-w-[400px] text-xs lg:p-[2.5em] pt-[0.5em] bg-[#312450]  h-screen left-0",
@@ -49,13 +48,14 @@ const Nav: React.FC<NavProps> = ({ className }: NavProps) => {
   }, []);
 
   console.log("className: ", className);
-  // const divClassNames = clsx('inner translate-y-0 transition-opacity duration-1000 ease min-h-full items-end md:items-stretch md:h-inherit md:line-height-inherit');
-  const divClassNames = clsx("");
+  const divClassNames = clsx(
+    "inner translate-y-0 transition-opacity duration-1000 ease min-h-full md:h-12 min-h-full items-end md:items-stretch md:h-inherit md:line-height-inherit"
+  );
   return (
     <section id="sidebar" className={sidebarClassNames(className)}>
       <div className={divClassNames}>
         <nav>
-          <ul className="flex flex-col lg:flex-col md:flex-row items-end list-none p-0 space-y-6">
+          <ul className="flex flex-col lg:flex-col md:flex-row items-end md:items-center lg:items-end list-none p-0 space-y-6 md:h-full">
             {menuItems.map((item, i) => (
               <li key={item.id} className={linkClassNames}>
                 <a

@@ -4,6 +4,19 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+  {
+    "name": "Storybook",
+    "request": "launch",
+    "runtimeArgs": [
+      "run-script",
+      "storybook"
+    ],
+    "runtimeExecutable": "npm",
+    "skipFiles": [
+      "<node_internals>/**"
+    ],
+    "type": "node"
+  },
     {
       "name": "Next.js: debug server-side",
       "type": "node-terminal",
