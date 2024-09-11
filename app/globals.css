@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url(../public/css/fontawesome-all.min.css);
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -4046,4 +4048,8 @@ body.is-preload #sidebar nav ul li {
     background-attachment: scroll;
   }
 
+}
+
+html {
+  scroll-behavior: smooth;
 }

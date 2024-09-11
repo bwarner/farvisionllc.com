@@ -1,28 +1,33 @@
-import React from "react";
-import { FaArrowDown } from "react-icons/fa";
-import classNames from "clsx";
+"use client";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
 interface IntroSectionProps {
   className?: string;
 }
 
-const buttonClassNames = `button`;
-
 const IntroSection: React.FC<IntroSectionProps> = ({ className }) => {
+  const { ref, inView } = useInView({
+    threshold: 0.1, // Trigger when 50% of the section is visible
+    initialInView: true,
+  });
+  useEffect(() => {
+    if (inView) {
+      window.location.hash = "#intro";
+    }
+  }, [inView]);
   return (
     <section id="intro" className="wrapper style1 fullscreen fade-up">
       <div className="inner">
-        <h1>Hyperspace</h1>
+        <h1>Farvision LLC</h1>
         <p>
-          Just another fine responsive site template designed by{" "}
-          <a href="http://html5up.net">HTML5 UP</a>
-          <br />
-          and released for free under the{" "}
-          <a href="http://html5up.net/license">Creative Commons</a>.
+          Your trusted partner for e-commerce software development. We build
+          custom solutions to help businesses succeed in the digital world.
         </p>
+
         <ul className="actions">
           <li>
-            <a href="#one" className="button scrolly">
+            <a href="#one" className="button">
               Learn more
             </a>
           </li>

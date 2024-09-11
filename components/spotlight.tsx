@@ -32,7 +32,6 @@ const Spotlight: React.FC<SpotlightProps> = ({
           alt={imageAlt}
           fill
           style={{ objectFit: "cover", objectPosition: imagePosition }}
-          sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
       <div className="content">
