@@ -19,19 +19,12 @@ const Menu: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<string>("");
 
   const handleClick = (e: React.MouseEvent) => {
-    let target = e.target as HTMLElement | null;
-    if (!target) return;
-
-    // Traverse up the DOM tree to check if an ancestor is an anchor with href starting with '#'
-    while (target && target !== e.currentTarget) {
-      if (target.tagName === "A") {
-        const href = target.getAttribute("href");
-        if (href) {
-          setSelectedItem(href);
-          break;
-        }
-      }
-      target = target.parentElement;
+    console.log("click");
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    console.log("href ", href);
+    if (href) {
+      window.location.hash = href; // Set the window location to the anchor's href
     }
   };
 

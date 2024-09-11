@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        customPink: "#b74e91",
+        customPinkAlt: "#953d75",
+      },
       backgroundImage: {
         intro: "url('/images/intro.jpg')",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
