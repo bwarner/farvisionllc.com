@@ -6,8 +6,8 @@ import clsx from "clsx";
 
 const initialState: ContactFormState = {
   name: "",
-  email: "bfwarner@gmail.com",
-  message: "Hello World!",
+  email: "",
+  message: "",
   success: null,
   error: null,
 };
