@@ -18,16 +18,6 @@ const Menu: React.FC = () => {
   const [currentHash, setCurrentHash] = useState<string>("");
   const [selectedItem, setSelectedItem] = useState<string>("");
 
-  const handleClick = (e: React.MouseEvent) => {
-    console.log("click");
-    e.preventDefault();
-    const href = e.currentTarget.getAttribute("href");
-    console.log("href ", href);
-    if (href) {
-      window.location.hash = href; // Set the window location to the anchor's href
-    }
-  };
-
   useEffect(() => {
     const handleHashChange = () => {
       setCurrentHash(window.location.hash);
@@ -44,12 +34,12 @@ const Menu: React.FC = () => {
   }, []);
 
   return (
-    <ul onClick={handleClick}>
+    <ul>
       {menuItems.map((item, i) => (
         <MenuItem
           key={item.id}
           href={item.id}
-          selected={selectedItem === item.id || item.id === currentHash}
+          selected={item.id === currentHash}
         >
           {item.name}
         </MenuItem>

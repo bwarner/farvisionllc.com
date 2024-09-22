@@ -1,20 +1,21 @@
 "use client";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import ContactForm from "./contact-form";
 
 interface ContactInfoProps {
-  address: string;
+  // address: string;
   email: string;
   phone: string;
 }
 
-const ContactInfo: React.FC<ContactInfoProps> = ({ address, email, phone }) => (
+const ContactInfo: React.FC<ContactInfoProps> = ({ email, phone }) => (
   <section>
     <ul className="contact">
-      <li>
+      {/* <li>
         <h3>Address</h3>
         <span>{address}</span>
-      </li>
+      </li> */}
       <li>
         <h3>Email</h3>
         <a href={`mailto:${email}`}>{email}</a>
@@ -57,36 +58,6 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ address, email, phone }) => (
   </section>
 );
 
-const ContactForm: React.FC = () => {
-  return (
-    <section>
-      <form method="post" action="#">
-        <div className="fields">
-          <div className="field half">
-            <label htmlFor="name">Name</label>
-            <input type="text" name="name" id="name" />
-          </div>
-          <div className="field half">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" />
-          </div>
-          <div className="field">
-            <label htmlFor="message">Message</label>
-            <textarea name="message" id="message" rows={5}></textarea>
-          </div>
-        </div>
-        <ul className="actions">
-          <li>
-            <button type="submit" className="button submit">
-              Send Message
-            </button>
-          </li>
-        </ul>
-      </form>
-    </section>
-  );
-};
-
 const GetInTouch: React.FC = () => {
   const { ref, inView } = useInView({
     threshold: 0.5, // Trigger when 50% of the section is visible
@@ -108,11 +79,7 @@ const GetInTouch: React.FC = () => {
 
         <div className="split style1">
           <ContactForm />
-          <ContactInfo
-            address="12345 Somewhere Road #654, Nashville, TN 00000-0000, USA"
-            email="info@farvisonllc.com"
-            phone="(415) 294-1325"
-          />
+          <ContactInfo email="info@farvisonllc.com" phone="(415) 294-1325" />
         </div>
       </div>
     </section>

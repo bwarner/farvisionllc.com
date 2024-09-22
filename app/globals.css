@@ -2392,6 +2392,11 @@ form>.fields>.field {
   width: calc(100% - 1.5em);
 }
 
+form>.fields>.field.error input[type="text"],
+form>.fields>.field.error textarea {
+  border: 1px solid #ff4e4e;
+}
+
 form>.fields>.field.half {
   width: calc(50% - 0.75em);
 }
@@ -2430,13 +2435,18 @@ form>.fields>.field.quarter {
 
 }
 
-label {
+label,
+.error-label {
   color: #ffffff;
   font-weight: bold;
   line-height: 1.5;
   margin: 0 0 0.7em 0;
   display: block;
   font-size: 1.1em;
+}
+
+.error-label {
+  color: #ff4e4e;
 }
 
 input[type="text"],
