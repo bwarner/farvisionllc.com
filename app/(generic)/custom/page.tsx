@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import type { Metadata } from "next";
 import ecommerce from "@/public/images/ecommerce.jpg"; // Assuming you have the image in the public/images folder
