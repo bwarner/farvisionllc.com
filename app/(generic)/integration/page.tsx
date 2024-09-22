@@ -23,9 +23,9 @@ const IntegrationPage = () => {
           <p>
             Our integrations ensure seamless connectivity between your
             e-commerce system and various services, improving efficiency and
-            ensuring real-time data flow. Whether you're automating payments,
-            managing inventory, or handling customer data, we ensure smooth and
-            secure integrations tailored to your business needs.
+            ensuring real-time data flow. Whether you&apos;re automating
+            payments, managing inventory, or handling customer data, we ensure
+            smooth and secure integrations tailored to your business needs.
           </p>
         </div>
       </section>

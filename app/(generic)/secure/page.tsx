@@ -22,8 +22,8 @@ const InfrastructurePage = () => {
             ensuring the highest level of data protection.
           </p>
           <p>
-            Whether it's protecting customer data, scaling with your business,
-            or ensuring compliance with industry standards, we offer
+            Whether it&apos;s protecting customer data, scaling with your
+            business, or ensuring compliance with industry standards, we offer
             infrastructure that adapts to your needs without compromising
             security.
           </p>

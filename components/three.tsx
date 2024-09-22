@@ -72,9 +72,9 @@ const GetInTouch: React.FC = () => {
       <div className="inner">
         <h2>Get in touch</h2>
         <p>
-          If you're looking for a reliable partner to build your next e-commerce
-          project, we'd love to hear from you. Contact us and let's discuss how
-          we can help your business grow.
+          If you&apos;re looking for a reliable partner to build your next
+          e-commerce project, we&apos;d love to hear from you. Contact us and
+          let&apos;s discuss how we can help your business grow.
         </p>
 
         <div className="split style1">
