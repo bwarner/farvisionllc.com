@@ -1,6 +1,13 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import Link from "next/link";
 import infrastructureImg from "@/public/images/chainwide.jpg"; // Assuming the image is in the public folder
+
+export const metadata: Metadata = {
+  title: "Farvision LLC - Secure and Scalable Infrastructure",
+  description:
+    "Farvision LLC offers secure and scalable infrastructure solutions for e-commerce platforms. Our infrastructure is designed to grow with your business while ensuring the highest level of data protection.",
+};
 
 const InfrastructurePage = () => {
   return (

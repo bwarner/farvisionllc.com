@@ -1,6 +1,12 @@
 import Image from "next/image";
-import Link from "next/link";
+import type { Metadata } from "next";
 import integrationImg from "@/public/images/infrastructure.jpg"; // Assuming the image is in the public folder
+
+export const metadata: Metadata = {
+  title: "Farvision LLC - Integration Services",
+  description:
+    "Farvision LLC offers seamless system integration services for e-commerce platforms. We connect your system with essential third-party tools to streamline operations.",
+};
 
 const IntegrationPage = () => {
   return (

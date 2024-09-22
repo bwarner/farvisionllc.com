@@ -1,6 +1,13 @@
 "use client";
 import Image from "next/image";
+import type { Metadata } from "next";
 import ecommerce from "@/public/images/ecommerce.jpg"; // Assuming you have the image in the public/images folder
+
+export const metadata: Metadata = {
+  title: "Farvision LLC - Custom E-Commerce Solutions",
+  description:
+    "Farvision LLC offers custom e-commerce solutions tailored to your business needs. Our platforms are designed to enhance customer experience, streamline operations, and scale with your business.",
+};
 
 const Wrapper = () => {
   return (
