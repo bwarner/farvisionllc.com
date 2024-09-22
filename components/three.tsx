@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import ContactForm from "./contact-form";
 
 interface ContactInfoProps {
   address: string;
@@ -56,36 +57,6 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ address, email, phone }) => (
     </ul>
   </section>
 );
-
-const ContactForm: React.FC = () => {
-  return (
-    <section>
-      <form method="post" action="#">
-        <div className="fields">
-          <div className="field half">
-            <label htmlFor="name">Name</label>
-            <input type="text" name="name" id="name" />
-          </div>
-          <div className="field half">
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" />
-          </div>
-          <div className="field">
-            <label htmlFor="message">Message</label>
-            <textarea name="message" id="message" rows={5}></textarea>
-          </div>
-        </div>
-        <ul className="actions">
-          <li>
-            <button type="submit" className="button submit">
-              Send Message
-            </button>
-          </li>
-        </ul>
-      </form>
-    </section>
-  );
-};
 
 const GetInTouch: React.FC = () => {
   const { ref, inView } = useInView({
