@@ -3668,23 +3668,6 @@ body.is-preload .wrapper.fade>.inner {
 
 /* Wrapper (main) */
 
-@media screen and (max-width: 1280px) {
-
-  #main-container {
-    margin-left: 0;
-    padding-top: 3.5em;
-  }
-
-}
-
-@media screen and (max-width: 736px) {
-
-  #main-container {
-    padding-top: 0;
-  }
-
-}
-
 #header+#wrapper>.wrapper>.inner {
   margin: 0 auto;
 }
@@ -3703,16 +3686,30 @@ body.is-preload .wrapper.fade>.inner {
   overflow-y: auto;
   min-height: 0;
   background-color: #24243B;
+  scroll-behavior: smooth;
 }
 
 #footer {
   flex-shrink: 0;
-  background-color: #1e1e32;
+  background-color: #24243B;
   padding: 1em 2em;
   text-align: center;
 }
 
 @media screen and (max-width: 1280px) {
+
+  #main-container {
+    margin-left: 0;
+    padding-top: 3.5em;
+  }
+
+}
+
+@media screen and (max-width: 736px) {
+
+  #main-container {
+    padding-top: 0;
+  }
 
 }
 

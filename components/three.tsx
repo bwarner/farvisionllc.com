@@ -48,7 +48,10 @@ const GetInTouch: React.FC = () => {
         <h2>Get in touch</h2>
         <p>
           Have a question about one of our products, or interested in working
-          together? Drop us a message.
+          together? Drop a message &mdash;{" "}
+          <a href="https://www.warnerware.com" target="_blank" rel="noopener noreferrer">
+            Byron Warner
+          </a>, Founder.
         </p>
 
         <div className="split style1">
