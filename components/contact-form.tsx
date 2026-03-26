@@ -8,6 +8,7 @@ const initialState: ContactFormState = {
   name: "",
   email: "",
   message: "",
+  company: "",
   success: null,
   error: null,
 };
@@ -37,8 +38,17 @@ const ContactForm: React.FC = () => {
         posthog.capture("contact_form_success");
       } else {
         posthog.capture("contact_form_error", {
-          error: updatedState.error,
-          field_errors: updatedState.errors?.fieldErrors,
+          error_type: updatedState.errors ? "validation" : "server",
+          field_count: updatedState.errors
+            ? Object.keys(updatedState.errors.fieldErrors || {}).filter(
+                (k) =>
+                  (
+                    updatedState.errors?.fieldErrors?.[
+                      k as keyof typeof updatedState.errors.fieldErrors
+                    ] || []
+                  ).length > 0
+              ).length
+            : 0,
         });
       }
     } finally {
@@ -56,6 +66,17 @@ const ContactForm: React.FC = () => {
           <p className="error-label">{state.error}</p>
         )}
         <div className="fields">
+          {/* Honeypot field — hidden from real users, bots fill it */}
+          <div style={{ position: "absolute", left: "-9999px" }} aria-hidden="true">
+            <input
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              value={state.company || ""}
+              onChange={handleChange}
+            />
+          </div>
           <div
             className={clsx("field half", {
               error: state?.errors?.fieldErrors?.name?.[0],

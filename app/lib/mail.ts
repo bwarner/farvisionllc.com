@@ -49,7 +49,7 @@ const EmailSchema = z.object({
     .string()
     .nonempty("Subject cannot be empty")
     .trim()
-    .transform<string>((str) => str.replace(/[<>]/g, "")),
+    .transform<string>((str) => str.replace(/[<>\r\n]/g, "")),
   body: z
     .string()
     .nonempty("Body cannot be empty")
@@ -89,7 +89,6 @@ async function sendMail(data: EmailData) {
   };
 
   const command = new SendEmailCommand(params);
-  console.log("Sending email:", validatedData);
   return client.send(command);
 }
 
