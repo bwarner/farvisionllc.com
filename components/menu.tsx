@@ -5,14 +5,9 @@ import MenuItem from "./menu-item";
 
 const menuItems = [
   { id: "#intro", name: "Welcome" },
-  { id: "#one", name: "Who we are" },
-  { id: "#two", name: "What we do" },
-  { id: "#three", name: "Get in touch" },
+  { id: "#products", name: "Products" },
+  { id: "#contact", name: "Contact" },
 ];
-
-interface NavProps {
-  className?: string;
-}
 
 const Menu: React.FC = () => {
   const [currentHash, setCurrentHash] = useState<string>("");
@@ -20,7 +15,8 @@ const Menu: React.FC = () => {
 
   useEffect(() => {
     const handleHashChange = () => {
-      setCurrentHash(window.location.hash);
+      const hash = window.location.hash;
+      setCurrentHash(hash || "#intro");
     };
     // Listen for hash changes
     window.addEventListener("hashchange", handleHashChange);

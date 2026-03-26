@@ -31,31 +31,34 @@ const config = {
 const client = new SESv2Client(config);
 
 // Zod schema with custom transformations
+const fromAddress =
+  process.env.CONTACT_FROM_ADDRESS || "info@farvisionllc.com";
+
 const EmailSchema = z.object({
-  from: z
+  replyTo: z
     .string()
-    .nonempty("From email cannot be empty")
+    .nonempty("Reply-to email cannot be empty")
     .email("Invalid email address")
-    .trim(), // Trim whitespace
+    .trim(),
   to: z
     .string()
     .nonempty("To email cannot be empty")
     .email("Invalid email address")
-    .trim(), // Trim whitespace
+    .trim(),
   subject: z
     .string()
     .nonempty("Subject cannot be empty")
     .trim()
-    .transform<string>((str) => str.replace(/[<>]/g, "")), // Basic escaping with explicit type
+    .transform<string>((str) => str.replace(/[<>]/g, "")),
   body: z
     .string()
     .nonempty("Body cannot be empty")
     .transform<string>((str) =>
       sanitizeHtml(str, {
-        allowedTags: [], // Remove all HTML tags if the body should be plain text
+        allowedTags: [],
         allowedAttributes: {},
       })
-    ), // Sanitize HTML content with explicit type
+    ),
 });
 
 type EmailData = z.infer<typeof EmailSchema>;
@@ -64,7 +67,7 @@ async function sendMail(data: EmailData) {
   // Validate and transform the data using the schema
   const validatedData = EmailSchema.parse(data);
 
-  // Send email using validated and sanitized data
+  // Send email from verified address, with visitor's email as Reply-To
   const params: SendEmailCommandInput = {
     Destination: {
       ToAddresses: [validatedData.to],
@@ -81,7 +84,8 @@ async function sendMail(data: EmailData) {
         },
       },
     },
-    FromEmailAddress: validatedData.from,
+    FromEmailAddress: fromAddress,
+    ReplyToAddresses: [validatedData.replyTo],
   };
 
   const command = new SendEmailCommand(params);

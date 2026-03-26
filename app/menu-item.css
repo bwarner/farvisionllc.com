@@ -10,14 +10,12 @@
 }
 
 .menu-item-anchor:before {
-  background: #3c2c62;
+  background: #1a1a2e;
 }
 
 .menu-item-anchor:after {
-  background-image: -moz-linear-gradient(to right, #5e42a6, #b74e91);
-  background-image: -webkit-linear-gradient(to right, #5e42a6, #b74e91);
-  background-image: -ms-linear-gradient(to right, #5e42a6, #b74e91);
-  background-image: linear-gradient(to right, #5e42a6, #b74e91);
+  background-image: none;
+  background-color: #ffffff;
   -moz-transition: max-width 0.2s ease;
   -webkit-transition: max-width 0.2s ease;
   -ms-transition: max-width 0.2s ease;
@@ -26,7 +24,7 @@
 }
 
 .menu-item-anchor:hover {
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .menu-item-anchor:active {
@@ -52,6 +50,6 @@
 
   .menu-item-anchor:after {
     background-image: none;
-    background-color: #b74e91;
+    background-color: #ffffff;
   }
 }

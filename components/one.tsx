@@ -10,6 +10,7 @@ interface SpotlightSectionProps {
   title: string;
   description: string;
   link: string;
+  external?: boolean;
 }
 
 const SpotlightSection: React.FC<SpotlightSectionProps> = ({
@@ -19,21 +20,44 @@ const SpotlightSection: React.FC<SpotlightSectionProps> = ({
   title,
   description,
   link,
+  external = false,
 }) => {
   const { ref, inView } = useInView({
-    threshold: 0.5, // Trigger when 50% of the section is visible
+    threshold: 0.5,
   });
+
+  const linkProps = external
+    ? { target: "_blank" as const, rel: "noopener noreferrer" }
+    : {};
 
   return (
     <section ref={ref} className={inView ? "active" : "inactive"}>
-      <a href={link} className="image">
-        <div style={{ position: "relative", width: "100%", height: "100%" }}>
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            fill
-            style={{ objectPosition: dataPosition, objectFit: "cover" }}
-          />
+      <a href={link} className="image" {...linkProps}>
+        <div style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "1em",
+        }}>
+          <div style={{
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            borderRadius: "0.5em",
+            overflow: "hidden",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2)",
+          }}>
+            <Image
+              src={imageSrc}
+              alt={imageAlt}
+              fill
+              style={{ objectPosition: dataPosition, objectFit: "cover" }}
+            />
+          </div>
         </div>
       </a>
       <div className="content">
@@ -42,8 +66,8 @@ const SpotlightSection: React.FC<SpotlightSectionProps> = ({
           <p>{description}</p>
           <ul className="actions">
             <li>
-              <a href={link} className="button">
-                Learn more
+              <a href={link} className="button" {...linkProps}>
+                {external ? "Visit site" : "Learn more"}
               </a>
             </li>
           </ul>
@@ -55,38 +79,41 @@ const SpotlightSection: React.FC<SpotlightSectionProps> = ({
 
 const Spotlights: React.FC = () => {
   const { ref, inView } = useInView({
-    threshold: 0.5, // Trigger when 50% of the section is visible
+    threshold: 0.5,
   });
   useEffect(() => {
     if (inView) {
-      window.location.hash = "#one";
+      window.location.hash = "#products";
     }
   }, [inView]);
   return (
-    <section id="one" ref={ref} className="wrapper style2 spotlights">
+    <section id="products" ref={ref} className="wrapper style2 spotlights">
       <SpotlightSection
-        imageSrc="/images/ecommerce.jpg"
-        imageAlt="E-commerce solutions image"
+        imageSrc="/images/resume-ai.png"
+        imageAlt="MyAwesomeResume - AI-powered resume management"
         dataPosition="center center"
-        title="Custom E-Commerce Solutions"
-        description="At Farvision LLC, we specialize in building tailored e-commerce platforms designed to scale with your business. Our solutions ensure seamless customer experiences and powerful backend integrations."
-        link="custom"
+        title="MyAwesomeResume"
+        description="AI-powered resume management with git-like versioning. Tailor your resume for every job, track changes across versions, and export to PDF or Word. Built with Next.js, Couchbase, and Anthropic Claude."
+        link="https://myawesomeresume.com"
+        external={true}
       />
       <SpotlightSection
-        imageSrc="/images/integration.png"
-        imageAlt="Integration services image"
-        dataPosition="top center"
-        title="Seamless System Integration"
-        description="We integrate your e-commerce platform with essential third-party tools such as payment gateways, inventory systems, and customer management software to streamline your operations."
-        link="integration"
+        imageSrc="/images/scansafeguard-ai.png"
+        imageAlt="ScanSafeguard - AI-powered security scanning"
+        dataPosition="center center"
+        title="ScanSafeguard"
+        description="AI-powered security scanning for networks, containers, S3 buckets, and GitHub repositories. An AI agent analyzes vulnerabilities, prioritizes risks, and guides you through remediation. Built on AWS with CDK, Lambda, and S3."
+        link="https://scansafeguard.com"
+        external={true}
       />
       <SpotlightSection
-        imageSrc="/images/infrastructure.jpg"
-        imageAlt="Security services image"
-        dataPosition="25% 25%"
-        title="Secure and Scalable Infrastructure"
-        description="Security and scalability are at the core of what we build. Our e-commerce solutions are designed to grow with your business while ensuring the highest level of data protection."
-        link="secure"
+        imageSrc="/images/filteredblend.png"
+        imageAlt="FilteredBlend - Premium coffee, tea, and drinkware"
+        dataPosition="center center"
+        title="FilteredBlend"
+        description="E-commerce brand selling premium specialty coffee, loose-leaf tea, and drinkware. Available on Shopify and Amazon, featuring Panama Geisha beans, insulated tumblers, and brewing accessories."
+        link="https://www.filteredblend.com"
+        external={true}
       />
     </section>
   );

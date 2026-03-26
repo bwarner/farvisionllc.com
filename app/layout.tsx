@@ -1,14 +1,40 @@
 import type { Metadata } from "next";
 import clsx from "clsx";
-import { Inter } from "next/font/google";
+import { Antonio, Jost } from "next/font/google";
 import PageLoadAnimation from "@/components/page-load";
+import { PostHogProvider } from "@/components/posthog-provider";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const antonio = Antonio({ subsets: ["latin"], variable: "--font-antonio", weight: ["100", "400", "700"] });
+const jost = Jost({ subsets: ["latin"], variable: "--font-jost", weight: ["400", "500", "700"] });
 
 export const metadata: Metadata = {
-  title: "Farvision LLC",
-  description: "Corporate website for Farvision LLC",
+  title: {
+    default: "Farvision LLC | Software Products & Development",
+    template: "%s | Farvision LLC",
+  },
+  description:
+    "Farvision LLC builds software products in San Francisco. Creator of MyAwesomeResume (AI resume management) and ScanSafeguard (AI security scanning).",
+  metadataBase: new URL("https://farvisionllc.com"),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://farvisionllc.com",
+    siteName: "Farvision LLC",
+    title: "Farvision LLC | Software Products & Development",
+    description:
+      "Software products built in San Francisco. MyAwesomeResume for AI resume management, ScanSafeguard for AI security scanning.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Farvision LLC | Software Products & Development",
+    description:
+      "Software products built in San Francisco. MyAwesomeResume for AI resume management, ScanSafeguard for AI security scanning.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -20,10 +46,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning={true}
-        className={clsx(inter.className, "is-preload")}
+        className={clsx(jost.variable, antonio.variable, "is-preload")}
       >
-        <PageLoadAnimation />
-        {children}
+        <PostHogProvider>
+          <PageLoadAnimation />
+          {children}
+        </PostHogProvider>
       </body>
     </html>
   );

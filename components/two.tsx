@@ -5,23 +5,29 @@ import clsx from "clsx";
 
 interface FeatureProps {
   iconClass: string;
+  iconStyle?: "solid" | "brands";
   title: string;
   description: string;
 }
 
-const Feature: React.FC<FeatureProps> = ({ iconClass, title, description }) => {
+const Feature: React.FC<FeatureProps> = ({
+  iconClass,
+  iconStyle = "solid",
+  title,
+  description,
+}) => {
   return (
     <section>
-      <span className={`icon solid major ${iconClass}`}></span>
+      <span className={`icon ${iconStyle} major ${iconClass}`}></span>
       <h3>{title}</h3>
       <p>{description}</p>
     </section>
   );
 };
 
-const WhatWeDo: React.FC = () => {
+const TechStack: React.FC = () => {
   const { ref, inView } = useInView({
-    threshold: 0.1, // Trigger when 50% of the section is visible
+    threshold: 0.1,
   });
 
   useEffect(() => {
@@ -40,56 +46,48 @@ const WhatWeDo: React.FC = () => {
       )}
     >
       <div className="inner">
-        <h2>What we do</h2>
+        <h2>Tech Stack</h2>
         <p>
-          At Farvision LLC, we specialize in building scalable, secure, and
-          innovative e-commerce solutions. We help businesses streamline their
-          operations through custom development, integration, and modern
-          technology.
+          The tools and technologies we use to build products. Full-stack
+          development with modern frameworks, cloud infrastructure, and AI
+          integration from prototype to production.
         </p>
         <div className="features">
           <Feature
-            iconClass="fa-laptop-code" // Changed to laptop code to signify development
-            title="Custom Development"
-            description="We develop custom e-commerce platforms tailored to your business needs, ensuring seamless user experience and scalability."
+            iconClass="fa-laptop-code"
+            title="Next.js & React"
+            description="Full-stack web applications with React Server Components, App Router, and server actions. Type-safe, fast, and deployed on Vercel."
           />
           <Feature
-            iconClass="fa-shield-alt" // Changed to shield to signify security
-            title="Secure Solutions"
-            description="Security is at the forefront of what we do. We build secure applications to protect both your business and customers."
+            iconClass="fa-aws"
+            iconStyle="brands"
+            title="AWS Cloud"
+            description="Infrastructure as code with AWS CDK. Lambda functions, S3 storage, SES email, and serverless architectures that scale automatically."
           />
           <Feature
-            iconClass="fa-plug" // Changed to plug to signify system integration
-            title="System Integrations"
-            description="We provide seamless integrations with third-party tools, payment gateways, inventory management systems, and more."
+            iconClass="fa-robot"
+            title="AI Integration"
+            description="Anthropic Claude and Vercel AI SDK powering intelligent features — from resume tailoring to vulnerability analysis and guided remediation."
           />
           <Feature
-            iconClass="fa-mobile-alt" // Changed to mobile to signify responsive design
-            title="Responsive Design"
-            description="Our solutions are optimized for all devices, providing a consistent and engaging experience across platforms."
+            iconClass="fa-code"
+            title="TypeScript"
+            description="Type-safe development across the entire stack. Shared types between frontend and backend, catching bugs at compile time."
           />
           <Feature
-            iconClass="fa-life-ring" // Changed to life ring to signify continuous support
-            title="Continuous Support"
-            description="We provide ongoing support and maintenance to ensure your platform runs smoothly and adapts to your growing needs."
+            iconClass="fa-database"
+            title="Databases & APIs"
+            description="Couchbase for flexible document storage, REST APIs, and serverless data layers. Designed for performance and reliability."
           />
           <Feature
-            iconClass="fa-lightbulb" // Changed to lightbulb to signify innovation
-            title="Innovative Solutions"
-            description="We innovate with cutting-edge technologies to provide unique features that set your business apart from the competition."
+            iconClass="fa-shield-alt"
+            title="Security & DevOps"
+            description="Vulnerability scanning, container security, CI/CD pipelines, and monitoring. Security built in from the start, not bolted on after."
           />
         </div>
-
-        <ul className="actions">
-          <li>
-            <a href="generic.html" className="button">
-              Learn more
-            </a>
-          </li>
-        </ul>
       </div>
     </section>
   );
 };
 
-export default WhatWeDo;
+export default TechStack;

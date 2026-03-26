@@ -17,17 +17,18 @@ const IntroSection: React.FC<IntroSectionProps> = ({ className }) => {
     }
   }, [inView]);
   return (
-    <section id="intro" className="wrapper style1 fullscreen fade-up">
+    <section ref={ref} id="intro" className="wrapper style1 fullscreen fade-up">
       <div className="inner">
         <h1>Farvision LLC</h1>
         <p>
-          Your trusted partner for e-commerce software development. We build
-          custom solutions to help businesses succeed in the digital world.
+          A San Francisco-based company with a growing portfolio of web
+          properties &mdash; from AI-powered software tools to e-commerce. We
+          design, build, and ship products from idea to production.
         </p>
 
         <ul className="actions">
           <li>
-            <a href="#one" className="button">
+            <a href="#products" className="button">
               Learn more
             </a>
           </li>

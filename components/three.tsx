@@ -4,52 +4,27 @@ import { useInView } from "react-intersection-observer";
 import ContactForm from "./contact-form";
 
 interface ContactInfoProps {
-  // address: string;
   email: string;
-  phone: string;
 }
 
-const ContactInfo: React.FC<ContactInfoProps> = ({ email, phone }) => (
+const ContactInfo: React.FC<ContactInfoProps> = ({ email }) => (
   <section>
     <ul className="contact">
-      {/* <li>
-        <h3>Address</h3>
-        <span>{address}</span>
-      </li> */}
       <li>
         <h3>Email</h3>
         <a href={`mailto:${email}`}>{email}</a>
       </li>
       <li>
-        <h3>Phone</h3>
-        <span>{phone}</span>
-      </li>
-      <li>
         <h3>Social</h3>
         <ul className="icons">
           <li>
-            <a href="#" className="icon brands fa-twitter">
-              <span className="label">Twitter</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="icon brands fa-facebook-f">
-              <span className="label">Facebook</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="icon brands fa-github">
-              <span className="label">GitHub</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="icon brands fa-instagram">
-              <span className="label">Instagram</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" className="icon brands fa-linkedin-in">
+            <a href="https://www.linkedin.com/company/112710249" className="icon brands fa-linkedin-in" target="_blank" rel="noopener noreferrer">
               <span className="label">LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=61566601373321" className="icon brands fa-facebook-f" target="_blank" rel="noopener noreferrer">
+              <span className="label">Facebook</span>
             </a>
           </li>
         </ul>
@@ -60,26 +35,25 @@ const ContactInfo: React.FC<ContactInfoProps> = ({ email, phone }) => (
 
 const GetInTouch: React.FC = () => {
   const { ref, inView } = useInView({
-    threshold: 0.5, // Trigger when 50% of the section is visible
+    threshold: 0.5,
   });
   useEffect(() => {
     if (inView) {
-      window.location.hash = "#three";
+      window.location.hash = "#contact";
     }
   }, [inView]);
   return (
-    <section ref={ref} id="three" className="wrapper style1 fade-up">
+    <section ref={ref} id="contact" className="wrapper style1 fade-up">
       <div className="inner">
         <h2>Get in touch</h2>
         <p>
-          If you&apos;re looking for a reliable partner to build your next
-          e-commerce project, we&apos;d love to hear from you. Contact us and
-          let&apos;s discuss how we can help your business grow.
+          Have a question about one of our products, or interested in working
+          together? Drop us a message.
         </p>
 
         <div className="split style1">
           <ContactForm />
-          <ContactInfo email="info@farvisonllc.com" phone="(415) 294-1325" />
+          <ContactInfo email="info@farvisionllc.com" />
         </div>
       </div>
     </section>

@@ -6,9 +6,21 @@ const contactToAddress =
   process.env.CONTACT_TO_ADDRESS || "info@farvisionllc.com";
 
 const ContactFormStateSchema = z.object({
-  name: z.string().trim().min(4),
-  email: z.string().trim().min(4).email(),
-  message: z.string().trim().min(10),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required")
+    .min(4, "Name must be at least 4 characters"),
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .email("Please enter a valid email address"),
+  message: z
+    .string()
+    .trim()
+    .min(1, "Message is required")
+    .min(10, "Message must be at least 10 characters"),
   success: z.boolean().nullable(),
   error: z.string().nullable(),
   errors: z
@@ -33,12 +45,13 @@ export async function sendContact(
     const { name, email, message } = formData;
     console.log("Sending contact formData:", formData);
     const result = await sendMail({
-      from: email,
+      replyTo: email,
       to: contactToAddress,
-      subject: `Contact form submission`,
+      subject: `Contact form submission from ${name}`,
       body: message,
     });
 
+    console.log("sendMail result:", result);
     return { name, email, message, success: true, error: null };
   } catch (error) {
     // console.error('Validation error:', error);

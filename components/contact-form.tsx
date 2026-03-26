@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
-import { useFormStatus } from "react-dom";
 import { sendContact, type ContactFormState } from "@/app/actions/contact";
 import clsx from "clsx";
+import posthog from "posthog-js";
 
 const initialState: ContactFormState = {
   name: "",
@@ -13,31 +13,48 @@ const initialState: ContactFormState = {
 };
 
 const ContactForm: React.FC = () => {
-  const status = useFormStatus();
   const [state, setState] = useState<ContactFormState>(initialState);
+  const [pending, setPending] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-
-    // Create a new object with the updated property
     setState((prevState) => ({
-      ...prevState, // Copy existing properties
-      [name]: value, // Update the specific property
+      ...prevState,
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const updatedState = await sendContact(state);
-    setState(updatedState);
+    setPending(true);
+    posthog.capture("contact_form_submitted");
+    try {
+      const updatedState = await sendContact(state);
+      setState(updatedState);
+      if (updatedState.success) {
+        posthog.capture("contact_form_success");
+      } else {
+        posthog.capture("contact_form_error", {
+          error: updatedState.error,
+          field_errors: updatedState.errors?.fieldErrors,
+        });
+      }
+    } finally {
+      setPending(false);
+    }
   };
 
   return (
     <section>
       <form onSubmit={handleSubmit}>
-        {state.error && <p className="error-label">{state.error}</p>}
+        {state.success && (
+          <p className="success-label">Message sent successfully!</p>
+        )}
+        {state.error && !state.errors && (
+          <p className="error-label">{state.error}</p>
+        )}
         <div className="fields">
           <div
             className={clsx("field half", {
@@ -51,12 +68,14 @@ const ContactForm: React.FC = () => {
               id="name"
               autoComplete="off"
               autoCorrect="off"
-              className={clsx("field half", {
-                error: state?.errors?.fieldErrors?.name,
-              })}
               value={state.name}
               onChange={handleChange}
             />
+            {state?.errors?.fieldErrors?.name?.[0] && (
+              <span className="field-error">
+                {state.errors.fieldErrors.name[0]}
+              </span>
+            )}
           </div>
           <div
             className={clsx("field half", {
@@ -73,9 +92,14 @@ const ContactForm: React.FC = () => {
               value={state.email}
               onChange={handleChange}
             />
+            {state?.errors?.fieldErrors?.email?.[0] && (
+              <span className="field-error">
+                {state.errors.fieldErrors.email[0]}
+              </span>
+            )}
           </div>
           <div
-            className={clsx("field half", {
+            className={clsx("field", {
               error: state?.errors?.fieldErrors?.message?.[0],
             })}
           >
@@ -87,6 +111,11 @@ const ContactForm: React.FC = () => {
               value={state.message}
               onChange={handleChange}
             ></textarea>
+            {state?.errors?.fieldErrors?.message?.[0] && (
+              <span className="field-error">
+                {state.errors.fieldErrors.message[0]}
+              </span>
+            )}
           </div>
         </div>
         <ul className="actions">
@@ -94,9 +123,9 @@ const ContactForm: React.FC = () => {
             <button
               type="submit"
               className="button submit"
-              disabled={status.pending}
+              disabled={pending}
             >
-              {status.pending ? "Sending..." : "Send Message"}
+              {pending ? "Sending..." : "Send Message"}
             </button>
           </li>
         </ul>
