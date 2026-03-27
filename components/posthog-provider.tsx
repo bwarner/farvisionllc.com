@@ -12,6 +12,11 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
       capture_pageview: true,
       capture_pageleave: true,
     });
+
+    // Register super property to identify events from this app
+    posthog.register({
+      app: "farvisionllc",
+    });
   }, []);
 
   return <PHProvider client={posthog}>{children}</PHProvider>;
