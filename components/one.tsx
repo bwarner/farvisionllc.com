@@ -107,12 +107,12 @@ const Spotlights: React.FC = () => {
         external={true}
       />
       <SpotlightSection
-        imageSrc="/images/filteredblend.png"
-        imageAlt="FilteredBlend - Premium coffee, tea, and drinkware"
+        imageSrc="/images/ecommerce.jpg"
+        imageAlt="SellAvant - Sales and commerce automation software"
         dataPosition="center center"
-        title="FilteredBlend"
-        description="E-commerce brand selling premium specialty coffee, loose-leaf tea, and drinkware. Available on Shopify and Amazon, featuring Panama Geisha beans, insulated tumblers, and brewing accessories."
-        link="https://www.filteredblend.com"
+        title="SellAvant"
+        description="Sales and commerce automation software for teams that need practical tooling around product operations, customer workflows, and revenue systems."
+        link="https://sellavant.com"
         external={true}
       />
     </section>

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | Farvision LLC",
   },
   description:
-    "Farvision LLC builds software products in San Francisco. Creator of MyAwesomeResume (AI resume management) and ScanSafeguard (AI security scanning).",
+    "Farvision LLC builds software products in San Francisco. Creator of SellAvant, ScanSafeguard, and MyAwesomeResume.",
   metadataBase: new URL("https://farvisionllc.com"),
   openGraph: {
     type: "website",
@@ -23,13 +23,13 @@ export const metadata: Metadata = {
     siteName: "Farvision LLC",
     title: "Farvision LLC | Software Products & Development",
     description:
-      "Software products built in San Francisco. MyAwesomeResume for AI resume management, ScanSafeguard for AI security scanning.",
+      "Software products built in San Francisco: SellAvant, ScanSafeguard, and MyAwesomeResume.",
   },
   twitter: {
     card: "summary",
     title: "Farvision LLC | Software Products & Development",
     description:
-      "Software products built in San Francisco. MyAwesomeResume for AI resume management, ScanSafeguard for AI security scanning.",
+      "Software products built in San Francisco: SellAvant, ScanSafeguard, and MyAwesomeResume.",
   },
   robots: {
     index: true,

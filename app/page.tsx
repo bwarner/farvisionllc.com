@@ -9,7 +9,7 @@ import Three from "@/components/three";
 export const metadata: Metadata = {
   title: "Farvision LLC | Software Products & Development",
   description:
-    "San Francisco company with a growing portfolio of web properties. Creators of MyAwesomeResume, ScanSafeguard, and FilteredBlend.",
+    "San Francisco company with a growing portfolio of web properties. Creators of SellAvant, ScanSafeguard, and MyAwesomeResume.",
 };
 
 const jsonLd = {
@@ -26,6 +26,12 @@ const jsonLd = {
     addressCountry: "US",
   },
   email: "info@farvisionllc.com",
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    email: "info@farvisionllc.com",
+    url: "https://farvisionllc.com/support",
+  },
   sameAs: [
     "https://www.linkedin.com/company/112710249",
     "https://www.facebook.com/profile.php?id=61566601373321",
