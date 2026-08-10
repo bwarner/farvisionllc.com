@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
+import { ReviewNote } from "@/components/policy";
 import {
   COMPANY,
   PLACEHOLDER_PREFIX,
@@ -69,6 +70,34 @@ describe("legal pages", () => {
   it("names Farvision LLC as the merchant of record on the refund page", () => {
     expect(readProse("app/refunds/page.tsx")).toContain("merchant of record");
     expect(COMPANY.statementDescriptor).toBe("FARVISION LLC");
+  });
+
+  describe("ReviewNote visibility", () => {
+    const original = process.env.VERCEL_ENV;
+    afterEach(() => {
+      process.env.VERCEL_ENV = original;
+    });
+
+    it("renders nothing in production", () => {
+      process.env.VERCEL_ENV = "production";
+      expect(ReviewNote({ children: "unreviewed" })).toBeNull();
+    });
+
+    it("renders on preview deployments and locally", () => {
+      process.env.VERCEL_ENV = "preview";
+      expect(ReviewNote({ children: "unreviewed" })).not.toBeNull();
+
+      delete process.env.VERCEL_ENV;
+      expect(ReviewNote({ children: "unreviewed" })).not.toBeNull();
+    });
+  });
+
+  it("keeps the customer-facing arbitration notice out of the hidden styling", () => {
+    const contents = read("app/terms/page.tsx");
+    expect(contents).toContain('className="policy-notice"');
+    // A legal disclosure must never be styled as a drafting marker, or it
+    // disappears in production along with them.
+    expect(contents).not.toContain('className="policy-review"');
   });
 
   it("blocks publishing while legal placeholders remain", () => {

@@ -43,7 +43,7 @@ const sections: readonly PolicySection[] = [
           organization, you represent that you are authorized to bind that
           organization, and &ldquo;you&rdquo; refers to that organization.
         </p>
-        <p className="policy-review">
+        <p className="policy-notice">
           <strong>Please read this. </strong>
           These Terms require most disputes to be resolved by{" "}
           <a href="#disputes" className="policy-link">

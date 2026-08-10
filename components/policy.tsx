@@ -45,9 +45,20 @@ export function PolicyBody({ sections }: { sections: readonly PolicySection[] })
   );
 }
 
-/** Visible marker for text that still needs counsel's sign-off. Deliberately
- *  loud: an invisible TODO in JSX is a TODO that gets deployed. */
+/**
+ * Marker for text that still needs counsel's sign-off. Deliberately loud in
+ * development and on preview deployments — an invisible TODO in JSX is a TODO
+ * that gets deployed — but hidden in production, where customers and payment
+ * reviewers would otherwise read internal drafting notes.
+ *
+ * Hiding the marker does not mean the work is done: `__tests__/legal.test.ts`
+ * still blocks POLICY_STATUS from flipping to "published" while any remain.
+ * Anything hidden here must be text that is merely unreviewed, never a factual
+ * claim that has not been verified.
+ */
 export function ReviewNote({ children }: { children: ReactNode }) {
+  if (process.env.VERCEL_ENV === "production") return null;
+
   return (
     <p className="policy-review">
       <strong>Pending legal review — </strong>

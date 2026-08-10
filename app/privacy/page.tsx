@@ -521,18 +521,18 @@ const sections: readonly PolicySection[] = [
           may have different data protection laws than the country you live in.
         </p>
         <p>
-          Where we transfer personal information out of the EEA or UK in
-          connection with the software products, we rely on the European
-          Commission&rsquo;s Standard Contractual Clauses, or the UK
-          International Data Transfer Addendum, as incorporated into our
-          agreements with the service providers listed above.
+          Where personal information is transferred out of the EEA or UK in
+          connection with the software products, we use service providers that
+          offer transfer mechanisms permitted under applicable law, including
+          the European Commission&rsquo;s Standard Contractual Clauses and the
+          UK International Data Transfer Addendum. If you would like details of
+          the safeguards that apply to a specific transfer, contact {email}.
         </p>
         <ReviewNote>
-          Confirm before publishing that a data processing agreement containing
-          those clauses is actually in place with each provider in the
-          subprocessor table. Most incorporate them into standard terms
-          automatically, but the statement above should not be made until it
-          has been checked.
+          Deliberately worded as what our providers offer, not as clauses we
+          have executed, because that has not been checked yet. Confirm a data
+          processing agreement is in place with each provider in the
+          subprocessor table, then tighten this to say so directly.
         </ReviewNote>
       </>
     ),

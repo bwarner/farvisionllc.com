@@ -186,6 +186,7 @@ body:has(.policy-page) {
   color: #94a3b8;
 }
 
+/* Internal drafting marker. Hidden in production — see ReviewNote. */
 .policy-review {
   border-left: 3px solid #d97706;
   background: #fffbeb;
@@ -197,6 +198,22 @@ body:has(.policy-page) {
 
 .policy-review strong {
   color: #9a3412;
+}
+
+/* Customer-facing legal notice, e.g. the arbitration disclosure. Always
+   visible, and kept separate from .policy-review so restyling or hiding the
+   drafting markers can never affect a disclosure that must stay conspicuous. */
+.policy-notice {
+  border-left: 3px solid #1d4ed8;
+  background: #eff6ff;
+  border-radius: 0 6px 6px 0;
+  padding: 0.85rem 1rem;
+  color: #1e3a5f !important;
+  font-size: 0.95rem !important;
+}
+
+.policy-notice strong {
+  color: #172033;
 }
 
 .policy-table-wrap {
