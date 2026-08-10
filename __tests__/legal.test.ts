@@ -72,11 +72,17 @@ describe("legal pages", () => {
   });
 
   it("blocks publishing while legal placeholders remain", () => {
+    // Two kinds of unfinished business block publication: TODO values, and
+    // ReviewNote callouts awaiting counsel. Both render on the live page.
     const outstanding = LEGAL_SOURCES.flatMap((source) =>
       read(source)
         .split("\n")
         .map((line, index) => ({ source, line: index + 1, text: line.trim() }))
-        .filter((entry) => entry.text.includes(PLACEHOLDER_PREFIX))
+        .filter(
+          (entry) =>
+            entry.text.includes(PLACEHOLDER_PREFIX) ||
+            entry.text.includes("<ReviewNote>"),
+        )
         // The marker's own declaration and the comments describing it are not
         // themselves placeholders.
         .filter(

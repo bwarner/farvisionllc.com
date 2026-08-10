@@ -126,9 +126,9 @@ Unresolved decisions are marked `TODO:` — resolve them before publishing.
 > responsibility through delivery. Whichever you choose here must match the
 > lost-package section of the shipping policy.
 >
-> **Payments** — Payments are processed by Shopify Payments. Charges appear on
-> your statement as TODO: descriptor from Shopify admin → Settings → Payments →
-> Shopify Payments → Manage → Customer billing statement.
+> **Payments** — Payments are processed by Shopify Payments. Filtered Blend is
+> operated by Farvision LLC, and charges currently appear on your statement as
+> **FARVISION** rather than Filtered Blend.
 >
 > **Marketplace orders** — Orders placed through Amazon are governed by
 > Amazon's terms and return policy, not these terms.
@@ -205,11 +205,16 @@ require a real business address for goods sellers.
 
 ## Before publishing — verify
 
-- [ ] **Statement descriptor** — read it from Shopify admin → Settings →
-      Payments → Shopify Payments → Manage → Customer billing statement, and
-      make sure it's recognizable on a card statement. Then fill it into the
-      store terms and the company [/refunds](https://farvisionllc.com/refunds)
-      page if it differs from `FARVISION LLC`.
+- [ ] **Change the statement descriptor.** It currently reads `FARVISION`,
+      but customers buy from a brand called Filtered Blend and have no reason
+      to recognize Farvision on a card statement. An unrecognized descriptor
+      is the leading cause of "I don't recognize this charge" chargebacks, and
+      those cost a fee even when you win. Change it in Shopify admin →
+      Settings → Payments → Shopify Payments → Manage → Customer billing
+      statement to something containing the brand, e.g. `FILTEREDBLEND` or
+      `FILTEREDBLEND.COM`. Update the store terms above once changed.
+      Until then, the terms disclose the mismatch, and order confirmation
+      emails should say what the charge will look like.
 - [ ] **FTC Mail Order Rule** — you must ship within the time you promise, or
       within 30 days if you don't state one, and notify the customer with an
       option to cancel if you can't. The processing-time claim above needs to

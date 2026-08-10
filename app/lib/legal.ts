@@ -62,8 +62,16 @@ export const AMAZON_DPP = {
   incidentNotificationHours: 24,
   /** Logs must exclude PII and be retained at least this long. */
   logRetentionMinimumDays: 90,
-  ingestsBuyerPii:
-    "TODO: confirm whether SellAvant ingests Amazon buyer PII (names, shipping addresses, phone numbers) at all. If the product can work from anonymized or aggregated order data, not ingesting it removes most of the Data Protection Policy burden and should be the default.",
+  /**
+   * SellAvant does not ingest buyer PII — no names, shipping addresses, or
+   * phone numbers from order or report endpoints. That keeps us out of the
+   * strictest part of the policy.
+   *
+   * If this ever changes, the 30-day deletion obligation above starts
+   * applying and /privacy#retention must change with it. Treat flipping this
+   * to true as a compliance change, not a feature flag.
+   */
+  ingestsBuyerPii: false,
 } as const;
 
 export type Product = {
@@ -83,7 +91,7 @@ export const PRODUCTS: readonly Product[] = [
     url: "https://sellavant.com",
     termsUrl: "https://sellavant.com/terms",
     privacyUrl: "https://sellavant.com/privacy",
-    data: "Amazon Seller Central connection and authorization tokens, listings, inventory, pricing, order and settlement data, advertising and performance metrics, and account information.",
+    data: "Amazon Seller Central connection and authorization tokens, listings, inventory, pricing, order and settlement data, advertising and performance metrics, and account information. SellAvant does not ingest buyer personal information such as names, shipping addresses, or phone numbers.",
   },
   {
     name: "ScanSafeguard",
@@ -127,11 +135,16 @@ export const STORES: readonly Store[] = [
     name: "Filtered Blend",
     tagline: "Passionate Coffee Enthusiasts",
     description: "Specialty coffee and drinkware, sold direct and on Amazon.",
-    url: "TODO: confirm the Filtered Blend storefront domain",
+    url: "https://www.filteredblend.com",
     platform: "Shopify",
     paymentProcessor: "Shopify Payments",
-    statementDescriptor:
-      "TODO: read the descriptor from Shopify admin → Settings → Payments → Shopify Payments → Manage → Customer billing statement",
+    /**
+     * Note the mismatch: customers buy from "Filtered Blend" but the card
+     * statement reads "Farvision". Unrecognized descriptors are a leading
+     * cause of friendly-fraud chargebacks, so the store policies call this
+     * out explicitly until the descriptor is changed in Shopify.
+     */
+    statementDescriptor: "FARVISION",
     data: "Order contents, shipping and billing address, contact details, delivery status, and payment status. Card details are handled by Shopify Payments and never reach our systems.",
   },
 ] as const;

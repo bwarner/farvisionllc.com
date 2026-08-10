@@ -356,24 +356,21 @@ const sections: readonly PolicySection[] = [
                 </td>
               </tr>
               <tr>
-                <th scope="row">
-                  Amazon order data containing buyer personal information
-                  (SellAvant)
-                </th>
+                <th scope="row">Amazon marketplace data (SellAvant)</th>
                 <td>
-                  Deleted within {AMAZON_DPP.piiRetentionDays} days of order
-                  delivery, including from backups, as required by
-                  Amazon&rsquo;s Data Protection Policy. Retained longer only
-                  where a tax or other legal requirement applies, and only for
-                  that purpose.
+                  SellAvant does not ingest buyer personal information. Listing,
+                  inventory, and aggregate order data is retained for the life
+                  of your account. Were we to begin handling buyer personal
+                  information, it would be deleted within{" "}
+                  {AMAZON_DPP.piiRetentionDays} days of order delivery as
+                  Amazon&rsquo;s Data Protection Policy requires.
                 </td>
               </tr>
               <tr>
                 <th scope="row">Backups</th>
                 <td>
                   Deleted data persists in encrypted backups and is purged on a
-                  rolling 90-day cycle, except for the Amazon buyer data above,
-                  which is purged from backups on the shorter schedule.
+                  rolling 90-day cycle.
                 </td>
               </tr>
               <tr>
@@ -407,9 +404,7 @@ const sections: readonly PolicySection[] = [
         <ReviewNote>
           Confirm each window above matches what the systems actually do. A
           published retention schedule you do not follow is worse than a vague
-          one. The Amazon row is the tightest constraint and the one most likely
-          to be violated by an ordinary backup policy:{" "}
-          {AMAZON_DPP.ingestsBuyerPii}
+          one.
         </ReviewNote>
       </>
     ),
