@@ -67,10 +67,11 @@ const sections: readonly PolicySection[] = [
           described here, for every product, regardless of which product website
           you signed up on. You can reach us at {email}.
         </p>
-        <ReviewNote>
-          Add a postal address for privacy correspondence:{" "}
+        <p>
+          {COMPANY.legalName} is a {COMPANY.formationState} limited liability
+          company. Written privacy correspondence can be sent to{" "}
           {COMPANY.mailingAddress}.
-        </ReviewNote>
+        </p>
       </>
     ),
   },
@@ -215,12 +216,12 @@ const sections: readonly PolicySection[] = [
           cookies and analytics where consent is required), and compliance with
           legal obligations (tax and accounting records).
         </p>
-        <ReviewNote>
-          Whether this section applies at all depends on an open question:{" "}
-          {COMPANY.servesEea}. If the products are not offered to EEA/UK
-          residents, replace this section with a plain statement to that effect
-          rather than leaving unclaimed GDPR language on the page.
-        </ReviewNote>
+        <p>
+          Our software products are available without geographic restriction,
+          so this section can apply to them. {STORES[0].name} is sold in the
+          United States and {COMPANY.commerceGeoRestriction}, so the GDPR does
+          not apply to store purchases.
+        </p>
       </>
     ),
   },
@@ -524,10 +525,19 @@ const sections: readonly PolicySection[] = [
           information in the United States and other countries. Those countries
           may have different data protection laws than the country you live in.
         </p>
+        <p>
+          Where we transfer personal information out of the EEA or UK in
+          connection with the software products, we rely on the European
+          Commission&rsquo;s Standard Contractual Clauses, or the UK
+          International Data Transfer Addendum, as incorporated into our
+          agreements with the service providers listed above.
+        </p>
         <ReviewNote>
-          If the products are offered to EEA or UK residents, name the transfer
-          mechanism here — normally Standard Contractual Clauses with each
-          provider. Tied to the same open question: {COMPANY.servesEea}.
+          Confirm before publishing that a data processing agreement containing
+          those clauses is actually in place with each provider in the
+          subprocessor table. Most incorporate them into standard terms
+          automatically, but the statement above should not be made until it
+          has been checked.
         </ReviewNote>
       </>
     ),

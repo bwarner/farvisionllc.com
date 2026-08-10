@@ -7,6 +7,7 @@ import {
   POLICY_EFFECTIVE_ISO,
   POLICY_EFFECTIVE_LABEL,
   POLICY_VERSION,
+  STORES,
   productList,
 } from "../lib/legal";
 
@@ -28,16 +29,24 @@ const sections: readonly PolicySection[] = [
     id: "scope",
     title: "What this covers",
     body: (
-      <p>
-        This policy applies to every purchase from {COMPANY.legalName},
-        including {productList()}. All purchases are processed through a single{" "}
-        {COMPANY.legalName} Stripe account and appear on your statement as{" "}
-        <strong>{COMPANY.statementDescriptor}</strong>. It forms part of our{" "}
-        <Link href="/terms" className="policy-link">
-          Terms of Service
-        </Link>
-        .
-      </p>
+      <>
+        <p>
+          This policy applies to purchases of {COMPANY.legalName} software
+          products: {productList()}. These are processed through a single{" "}
+          {COMPANY.legalName} Stripe account and appear on your statement as{" "}
+          <strong>{COMPANY.statementDescriptor}</strong>. It forms part of our{" "}
+          <Link href="/terms" className="policy-link">
+            Terms of Service
+          </Link>
+          .
+        </p>
+        <p>
+          Purchases of physical goods from our retail brands, including{" "}
+          {STORES.map((store) => store.name).join(", ")}, use a different
+          payment processor and are covered by that store&rsquo;s own return
+          and refund policy.
+        </p>
+      </>
     ),
   },
   {

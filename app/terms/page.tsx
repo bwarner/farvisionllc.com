@@ -43,6 +43,16 @@ const sections: readonly PolicySection[] = [
           organization, you represent that you are authorized to bind that
           organization, and &ldquo;you&rdquo; refers to that organization.
         </p>
+        <p className="policy-review">
+          <strong>Please read this. </strong>
+          These Terms require most disputes to be resolved by{" "}
+          <a href="#disputes" className="policy-link">
+            binding individual arbitration
+          </a>{" "}
+          rather than in court, and waive your right to a jury trial and to
+          participate in a class action. You may opt out of arbitration within{" "}
+          {COMPANY.arbitrationOptOutDays} days of first accepting these Terms.
+        </p>
       </>
     ),
   },
@@ -75,11 +85,10 @@ const sections: readonly PolicySection[] = [
           </Link>{" "}
           covers both.
         </p>
-        <ReviewNote>
-          Add the entity&rsquo;s {COMPANY.formationState} and a mailing address
-          for legal notices: {COMPANY.mailingAddress}. Payment reviewers and app
-          stores both look for these.
-        </ReviewNote>
+        <p>
+          {COMPANY.legalName} is a {COMPANY.formationState} limited liability
+          company. Legal notices should be sent to {COMPANY.mailingAddress}.
+        </p>
       </>
     ),
   },
@@ -526,15 +535,27 @@ const sections: readonly PolicySection[] = [
           goodwill, or business opportunities, whether or not we were advised of
           the possibility of those damages.
         </p>
-        <ReviewNote>
-          A monetary cap on <em>direct</em> damages still needs to be set —{" "}
-          {COMPANY.liabilityCap}. The exclusion above only covers indirect
-          damages; the cap is the half that actually limits exposure.
-        </ReviewNote>
         <p>
-          Some jurisdictions do not allow certain limitations of liability, so
-          some of these limitations may not apply to you.
+          To the maximum extent permitted by law, the total aggregate liability
+          of {COMPANY.legalName} arising out of or relating to these Terms or
+          the products will not exceed the greater of (a) the total fees you
+          paid to {COMPANY.legalName} for the applicable product in the twelve
+          months before the event giving rise to the claim, or (b) one hundred
+          US dollars (US$100).
         </p>
+        <p>
+          These limitations apply to all claims, whether based in contract,
+          tort, negligence, strict liability, or any other theory, and apply
+          even if a limited remedy fails of its essential purpose. Some
+          jurisdictions do not allow certain limitations of liability, so some
+          of these limitations may not apply to you.
+        </p>
+        <ReviewNote>
+          The cap above is the conventional formula for software of this size,
+          not a decision that has been signed off. Confirm the amount with
+          counsel — it is the provision most likely to be tested, and the one
+          that determines actual exposure.
+        </ReviewNote>
       </>
     ),
   },
@@ -558,18 +579,71 @@ const sections: readonly PolicySection[] = [
   },
   {
     id: "disputes",
-    title: "Governing law and disputes",
+    title: "Governing law and dispute resolution",
     body: (
       <>
         <p>
-          Before filing a claim, you agree to try to resolve the dispute
-          informally by contacting {email}. We will try to resolve it with you
-          in good faith within 30 days.
+          <strong>Governing law.</strong> These Terms and any dispute arising
+          out of them are governed by the laws of {COMPANY.governingLaw},
+          without regard to its conflict-of-laws rules.
+        </p>
+        <p>
+          <strong>Informal resolution first.</strong> Before starting an
+          arbitration or filing a claim, you agree to contact {email} and
+          describe the dispute. We will try in good faith to resolve it with you
+          within 30 days. This step is a condition of bringing a claim.
+        </p>
+        <p>
+          <strong>Binding arbitration.</strong> If we cannot resolve a dispute
+          informally, you and {COMPANY.legalName} agree that any dispute
+          arising out of or relating to these Terms or the products will be
+          resolved by <strong>binding individual arbitration</strong>,
+          administered by {COMPANY.arbitrationProvider} under its rules then in
+          effect — the Consumer Arbitration Rules where you are an individual
+          using a product for personal purposes, and the Commercial Arbitration
+          Rules otherwise. The arbitration will be seated in {COMPANY.venue},
+          and may be conducted by video, telephone, or on written submissions
+          where the applicable rules allow. Judgment on the award may be entered
+          in any court with jurisdiction.
+        </p>
+        <p>
+          <strong>You and we are giving up the right to a jury trial and to
+          participate in a class action.</strong> Claims must be brought
+          individually. Claims may not be consolidated or arbitrated on a class,
+          collective, or representative basis, and the arbitrator may not award
+          relief to anyone who is not a party.
+        </p>
+        <p>
+          <strong>Exceptions.</strong> Either party may bring a claim in small
+          claims court if it qualifies, and either party may seek injunctive
+          relief in court to stop unauthorized use or infringement of
+          intellectual property. Nothing here waives any right to seek public
+          injunctive relief that cannot be waived under California law; any such
+          claim proceeds in court and is severed from arbitration.
+        </p>
+        <p>
+          <strong>How to opt out.</strong> You may opt out of this arbitration
+          agreement by emailing {email} with the subject line
+          &ldquo;Arbitration Opt-Out&rdquo; within{" "}
+          {COMPANY.arbitrationOptOutDays} days of first accepting these Terms.
+          Include your name and the account or product. Opting out does not
+          affect any other part of these Terms, and we will not hold it against
+          you.
+        </p>
+        <p>
+          <strong>Fees and severability.</strong> Arbitration fees are allocated
+          under the applicable {COMPANY.arbitrationProvider} rules. If the class
+          waiver above is found unenforceable as to a particular claim, that
+          claim is severed and proceeds in court in {COMPANY.venue}, while the
+          remaining claims stay in arbitration. This section survives
+          termination.
         </p>
         <ReviewNote>
-          Governing law, venue, and dispute mechanism are unset and are the most
-          important gap on this page. Governing law: {COMPANY.governingLaw}.
-          Venue: {COMPANY.venue}. Mechanism: {COMPANY.disputeResolution}.
+          Arbitration clauses are the highest-stakes boilerplate on this page
+          and California enforceability is fact-specific. Have counsel review
+          this wording as written — particularly the class waiver, the
+          public-injunctive-relief carve-out, and how arbitration fees fall on
+          consumer claimants.
         </ReviewNote>
       </>
     ),

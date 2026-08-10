@@ -27,17 +27,22 @@ export const COMPANY = {
   email: "info@farvisionllc.com",
   /** Must match the Stripe account's statement descriptor exactly. */
   statementDescriptor: "FARVISION LLC",
-  formationState: "TODO: state of formation",
-  mailingAddress: "TODO: full mailing address for legal notices",
-  governingLaw: "TODO: governing law state",
-  venue: "TODO: county and state for venue",
-  /** Cap on direct damages. See /terms#liability. */
-  liabilityCap: "TODO: cap formula, e.g. fees paid in the prior 12 months or $100, whichever is greater",
-  disputeResolution:
-    "TODO: decide between binding arbitration with class-action waiver, or courts in the venue above",
-  /** Whether the products are offered to individuals in the EEA/UK. Drives the
-   *  legal-bases and international-transfer sections of the privacy policy. */
-  servesEea: "TODO: confirm whether the products are offered to EEA/UK residents",
+  formationState: "California",
+  mailingAddress: "1422 14th Ave, San Francisco, CA 94122",
+  governingLaw: "the State of California",
+  venue: "San Francisco County, California",
+  /** Arbitration provider and seat. See /terms#disputes. */
+  arbitrationProvider: "the American Arbitration Association",
+  /** Window to opt out of arbitration, measured from first acceptance.
+   *  An opt-out materially strengthens enforceability. */
+  arbitrationOptOutDays: 30,
+  /**
+   * Geographic availability drives the GDPR sections of the privacy policy.
+   * The software products are unrestricted, so GDPR can apply to them; the
+   * store deliberately does not sell into the EEA or UK.
+   */
+  softwareGeoRestriction: "none",
+  commerceGeoRestriction: "does not sell or ship to the EEA or UK",
 } as const;
 
 /**

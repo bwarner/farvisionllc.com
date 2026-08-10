@@ -76,7 +76,15 @@ describe("legal pages", () => {
       read(source)
         .split("\n")
         .map((line, index) => ({ source, line: index + 1, text: line.trim() }))
-        .filter((entry) => entry.text.includes(PLACEHOLDER_PREFIX)),
+        .filter((entry) => entry.text.includes(PLACEHOLDER_PREFIX))
+        // The marker's own declaration and the comments describing it are not
+        // themselves placeholders.
+        .filter(
+          (entry) =>
+            !entry.text.includes("PLACEHOLDER_PREFIX") &&
+            !entry.text.startsWith("*") &&
+            !entry.text.startsWith("//"),
+        ),
     );
 
     if (POLICY_STATUS === "published") {

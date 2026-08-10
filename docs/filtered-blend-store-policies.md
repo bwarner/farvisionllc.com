@@ -133,14 +133,41 @@ Unresolved decisions are marked `TODO:` — resolve them before publishing.
 > **Marketplace orders** — Orders placed through Amazon are governed by
 > Amazon's terms and return policy, not these terms.
 >
-> **Limitation of liability** — TODO: mirror the cap decided for the company
-> Terms, adjusted for consumer goods. Do not copy the software disclaimer
-> verbatim; implied warranties on goods sold to consumers cannot be disclaimed
-> as broadly.
+> **Limitation of liability** — TODO: mirror the cap in the company Terms
+> (greater of fees paid in the prior 12 months or US$100), adjusted for
+> consumer goods. Do not copy the software disclaimer verbatim; implied
+> warranties on goods sold to consumers cannot be disclaimed as broadly.
 >
-> **Governing law** — TODO: same jurisdiction as the company Terms.
+> **Governing law** — These terms are governed by the laws of the State of
+> California, without regard to its conflict-of-laws rules.
 >
-> **Contact** — TODO: support email address.
+> **Disputes** — TODO: decide separately from the software Terms. See the note
+> below before copying the arbitration clause across.
+>
+> **Where we sell** — We sell and ship within the United States. We do not
+> sell or ship to the European Economic Area or the United Kingdom.
+>
+> **Contact** — Farvision LLC, 1422 14th Ave, San Francisco, CA 94122.
+> TODO: support email address.
+
+### A note on arbitration for the store
+
+The company Terms now require binding individual arbitration with a class
+waiver and a 30-day opt-out. **Do not copy that clause into the store terms
+without asking counsel specifically about consumer goods.** The calculus is
+different:
+
+- Software customers are largely businesses; coffee buyers are consumers, and
+  consumer arbitration clauses face more unconscionability scrutiny in
+  California.
+- Under AAA Consumer Arbitration Rules the business pays most of the fees, so
+  for $50 orders arbitration can cost far more than the dispute.
+- Amazon-channel orders already fall under Amazon's own dispute process, so
+  the clause would only reach direct Shopify sales.
+
+For a store this size, relying on small claims court and California law may
+be the better answer than arbitration. That is a judgment call, not a
+drafting one.
 
 ---
 
