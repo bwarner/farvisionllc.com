@@ -5,9 +5,14 @@ import Footer from "@/components/footer";
 import One from "@/components/one";
 
 import Three from "@/components/three";
-import { COMPANY, PRODUCTS, productList } from "./lib/legal";
+import { COMPANY, PLACEHOLDER_PREFIX, PRODUCTS, STORES, productList } from "./lib/legal";
 
-const description = `San Francisco company with a growing portfolio of web properties. Creators of ${productList()}.`;
+const description = `San Francisco company with a growing portfolio of web properties. Creators of ${productList()}, and the coffee brand ${STORES[0].name}.`;
+
+/** Placeholder values must not reach structured data — a fabricated URL is
+ *  worse than an absent one. */
+const resolved = (value: string) =>
+  value.startsWith(PLACEHOLDER_PREFIX) ? undefined : value;
 
 export const metadata: Metadata = {
   title: "Farvision LLC | Software Products & Development",
@@ -39,6 +44,13 @@ const jsonLd = {
     url: product.url,
     description: product.description,
     applicationCategory: "BusinessApplication",
+  })),
+  subOrganization: STORES.map((store) => ({
+    "@type": "OnlineStore",
+    name: store.name,
+    slogan: store.tagline,
+    description: store.description,
+    url: resolved(store.url),
   })),
   sameAs: [
     "https://www.linkedin.com/company/112710249",

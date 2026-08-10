@@ -9,6 +9,7 @@ import {
   POLICY_EFFECTIVE_LABEL,
   POLICY_VERSION,
   PRODUCTS,
+  STORES,
   SUBPROCESSORS,
   productList,
 } from "../lib/legal";
@@ -35,7 +36,18 @@ const sections: readonly PolicySection[] = [
         <p>
           This Privacy Policy explains how {COMPANY.legalName} collects, uses,
           shares, and retains information across all of its products and
-          websites, including {productList()}.
+          websites, including the software products {productList()} and the
+          retail brands{" "}
+          {STORES.map((store) => store.name).join(", ")}.
+        </p>
+        <p>
+          Our{" "}
+          <Link href="/terms" className="policy-link">
+            Terms of Service
+          </Link>{" "}
+          cover only the software products. Purchases of physical goods are
+          governed by the relevant store&rsquo;s own terms and return policy.
+          This Privacy Policy covers both.
         </p>
         <p>
           Individual products may publish a supplemental privacy notice covering
@@ -106,13 +118,13 @@ const sections: readonly PolicySection[] = [
   },
   {
     id: "product-data",
-    title: "Product data by product",
+    title: "Data by product and brand",
     body: (
       <div className="policy-table-wrap">
         <table className="policy-table">
           <thead>
             <tr>
-              <th scope="col">Product</th>
+              <th scope="col">Product or brand</th>
               <th scope="col">Data collected</th>
             </tr>
           </thead>
@@ -121,6 +133,12 @@ const sections: readonly PolicySection[] = [
               <tr key={product.name}>
                 <th scope="row">{product.name}</th>
                 <td>{product.data}</td>
+              </tr>
+            ))}
+            {STORES.map((store) => (
+              <tr key={store.name}>
+                <th scope="row">{store.name}</th>
+                <td>{store.data}</td>
               </tr>
             ))}
           </tbody>
@@ -197,15 +215,25 @@ const sections: readonly PolicySection[] = [
     id: "payments",
     title: "Payments",
     body: (
-      <p>
-        Payments for every product are processed by Stripe under a single{" "}
-        {COMPANY.legalName} account. Stripe collects and processes your payment
-        details under its own privacy policy. We receive payment status, billing
-        contact information, invoice details, and limited payment metadata in
-        order to manage billing, provide support, and respond to disputes.
-        Charges appear on your statement as{" "}
-        <strong>{COMPANY.statementDescriptor}</strong>.
-      </p>
+      <>
+        <p>
+          <strong>Software products.</strong> Payments are processed by Stripe
+          under a single {COMPANY.legalName} account and appear on your
+          statement as <strong>{COMPANY.statementDescriptor}</strong>.
+        </p>
+        <p>
+          <strong>Retail brands.</strong> Purchases from{" "}
+          {STORES.map((store) => store.name).join(", ")} are processed by
+          Shopify Payments and appear under that store&rsquo;s own descriptor.
+        </p>
+        <p>
+          In both cases the processor collects and handles your card details
+          under its own privacy policy, and we never receive or store full card
+          numbers. We receive payment status, billing contact information, order
+          and invoice details, and limited payment metadata in order to fulfill
+          orders, manage billing, provide support, and respond to disputes.
+        </p>
+      </>
     ),
   },
   {
@@ -338,6 +366,16 @@ const sections: readonly PolicySection[] = [
                 <td>
                   Retained for 7 years to meet tax and accounting requirements,
                   even after account closure.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  Store orders and shipping details (retail brands)
+                </th>
+                <td>
+                  Retained for 7 years alongside the transaction record for tax
+                  and accounting purposes. Marketing contact details are kept
+                  until you unsubscribe or ask us to delete them.
                 </td>
               </tr>
               <tr>

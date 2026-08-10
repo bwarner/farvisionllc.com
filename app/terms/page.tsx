@@ -8,6 +8,7 @@ import {
   POLICY_EFFECTIVE_LABEL,
   POLICY_VERSION,
   PRODUCTS,
+  STORES,
   productList,
 } from "../lib/legal";
 
@@ -61,6 +62,18 @@ const sections: readonly PolicySection[] = [
         <p>
           This is true regardless of which product you purchased or which
           product website you signed up on.
+        </p>
+        <p>
+          {COMPANY.legalName} also operates retail brands that sell physical
+          goods, including{" "}
+          {STORES.map((store) => store.name).join(", ")}. Those sales are not
+          covered by these Terms, use a different payment processor and
+          statement descriptor, and are governed by that store&rsquo;s own
+          terms, shipping, and return policies. Our{" "}
+          <Link href="/privacy" className="policy-link">
+            Privacy Policy
+          </Link>{" "}
+          covers both.
         </p>
         <ReviewNote>
           Add the entity&rsquo;s {COMPANY.formationState} and a mailing address

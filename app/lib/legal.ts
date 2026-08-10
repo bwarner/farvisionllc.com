@@ -98,6 +98,39 @@ export const PRODUCTS: readonly Product[] = [
   },
 ] as const;
 
+/**
+ * Direct-to-consumer commerce brands operated by Farvision LLC. Deliberately
+ * separate from PRODUCTS: selling physical goods to consumers carries terms
+ * the software master agreement does not have (shipping, title and risk of
+ * loss, returns, food labeling), and it bills through a different processor.
+ * The company Privacy Policy covers these; the company Terms of Service does
+ * not — see the store's own policies.
+ */
+export type Store = {
+  name: string;
+  tagline: string;
+  description: string;
+  url: string;
+  platform: string;
+  paymentProcessor: string;
+  statementDescriptor: string;
+  data: string;
+};
+
+export const STORES: readonly Store[] = [
+  {
+    name: "Filtered Blend",
+    tagline: "Passionate Coffee Enthusiasts",
+    description: "Specialty coffee and drinkware, sold direct and on Amazon.",
+    url: "TODO: confirm the Filtered Blend storefront domain",
+    platform: "Shopify",
+    paymentProcessor: "Shopify Payments",
+    statementDescriptor:
+      "TODO: read the descriptor from Shopify admin → Settings → Payments → Shopify Payments → Manage → Customer billing statement",
+    data: "Order contents, shipping and billing address, contact details, delivery status, and payment status. Card details are handled by Shopify Payments and never reach our systems.",
+  },
+] as const;
+
 export const PRODUCT_NAMES = PRODUCTS.map((product) => product.name);
 
 /** "SellAvant, ScanSafeguard, and MyAwesomeResume" */
@@ -112,7 +145,12 @@ export const productList = (conjunction: "and" | "or" = "and") => {
  * accurate — it is the list customers and their security reviewers rely on.
  */
 export const SUBPROCESSORS: readonly { name: string; purpose: string }[] = [
-  { name: "Stripe", purpose: "Payment processing, subscription billing, and invoicing." },
+  { name: "Stripe", purpose: "Payment processing, subscription billing, and invoicing for the software products." },
+  {
+    name: "Shopify",
+    purpose:
+      "Storefront, order management, and payment processing (Shopify Payments) for Filtered Blend.",
+  },
   { name: "Vercel", purpose: "Application hosting and content delivery." },
   { name: "PostHog", purpose: "Product analytics and usage measurement." },
   {

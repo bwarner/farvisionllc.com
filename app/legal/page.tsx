@@ -7,6 +7,7 @@ import {
   POLICY_EFFECTIVE_LABEL,
   POLICY_VERSION,
   PRODUCTS,
+  STORES,
   productList,
 } from "../lib/legal";
 
@@ -111,6 +112,28 @@ export default function LegalPage() {
                   >
                     Privacy notice
                   </a>
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          <h2 className="policy-heading">Retail brands</h2>
+          <p>
+            {COMPANY.legalName} also operates retail brands that sell physical
+            goods. Purchases from these stores are <strong>not</strong> covered
+            by the Terms of Service or Refund Policy above — they use a
+            different payment processor and are governed by each store&rsquo;s
+            own terms, shipping, and return policies. The Privacy Policy above
+            does cover them.
+          </p>
+          <ul className="policy-list">
+            {STORES.map((store) => (
+              <li key={store.name} className="policy-section">
+                <h2>{store.name}</h2>
+                <p>
+                  {store.tagline} &mdash; {store.description} Sold on{" "}
+                  {store.platform} and Amazon, with payments processed by{" "}
+                  {store.paymentProcessor}.
                 </p>
               </li>
             ))}
