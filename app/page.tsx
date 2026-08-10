@@ -5,33 +5,41 @@ import Footer from "@/components/footer";
 import One from "@/components/one";
 
 import Three from "@/components/three";
+import { COMPANY, PRODUCTS, productList } from "./lib/legal";
+
+const description = `San Francisco company with a growing portfolio of web properties. Creators of ${productList()}.`;
 
 export const metadata: Metadata = {
   title: "Farvision LLC | Software Products & Development",
-  description:
-    "San Francisco company with a growing portfolio of web properties. Creators of SellAvant, ScanSafeguard, and MyAwesomeResume.",
+  description,
 };
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Farvision LLC",
-  url: "https://farvisionllc.com",
-  description:
-    "San Francisco company with a growing portfolio of web properties. Creators of MyAwesomeResume, ScanSafeguard, and FilteredBlend.",
+  name: COMPANY.legalName,
+  url: COMPANY.site,
+  description,
   address: {
     "@type": "PostalAddress",
     addressLocality: "San Francisco",
     addressRegion: "CA",
     addressCountry: "US",
   },
-  email: "info@farvisionllc.com",
+  email: COMPANY.email,
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
-    email: "info@farvisionllc.com",
-    url: "https://farvisionllc.com/support",
+    email: COMPANY.email,
+    url: `${COMPANY.site}/support`,
   },
+  owns: PRODUCTS.map((product) => ({
+    "@type": "SoftwareApplication",
+    name: product.name,
+    url: product.url,
+    description: product.description,
+    applicationCategory: "BusinessApplication",
+  })),
   sameAs: [
     "https://www.linkedin.com/company/112710249",
     "https://www.facebook.com/profile.php?id=61566601373321",

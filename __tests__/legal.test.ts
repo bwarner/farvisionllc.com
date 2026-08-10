@@ -28,24 +28,34 @@ const readProse = (relativePath: string) =>
   read(relativePath).replace(/\s+/g, " ");
 
 describe("legal pages", () => {
-  it("keeps the product list in one place", () => {
-    // Product names belong in legal.ts, not hardcoded into page copy — the
-    // exceptions are clauses that genuinely apply to one product only, where
-    // naming it is the point.
-    const namedInProductSpecificClauses = new Set([
-      "ScanSafeguard", // /terms#authorized-testing
-      "SellAvant", // /terms#third-party — Amazon SP-API connection
-    ]);
+  // Product names belong in legal.ts, not hardcoded into page copy. A
+  // hardcoded list is how the homepage JSON-LD ended up advertising a product
+  // that no longer exists. `allowed` covers clauses that genuinely apply to a
+  // single product, where naming it is the point.
+  const DRY_SOURCES = [
+    {
+      path: "app/terms/page.tsx",
+      allowed: ["ScanSafeguard", "SellAvant"], // #authorized-testing, #third-party
+    },
+    {
+      path: "app/privacy/page.tsx",
+      allowed: ["SellAvant"], // #retention — Amazon buyer PII carve-out
+    },
+    { path: "app/page.tsx", allowed: [] },
+    { path: "app/legal/page.tsx", allowed: [] },
+  ];
 
-    expect(PRODUCTS.length).toBeGreaterThan(0);
-    for (const source of ["app/terms/page.tsx", "app/privacy/page.tsx"]) {
-      const contents = read(source);
+  it.each(DRY_SOURCES)(
+    "does not hardcode product names in $path",
+    ({ path, allowed }) => {
+      expect(PRODUCTS.length).toBeGreaterThan(0);
+      const contents = read(path);
       for (const product of PRODUCTS) {
-        if (namedInProductSpecificClauses.has(product.name)) continue;
+        if (allowed.includes(product.name)) continue;
         expect(contents).not.toContain(product.name);
       }
-    }
-  });
+    },
+  );
 
   it("formats the product list with an Oxford comma", () => {
     expect(productList()).toBe(
