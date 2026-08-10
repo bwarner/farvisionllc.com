@@ -154,12 +154,16 @@ export const SUBPROCESSORS: readonly { name: string; purpose: string }[] = [
   { name: "Vercel", purpose: "Application hosting and content delivery." },
   { name: "PostHog", purpose: "Product analytics and usage measurement." },
   {
-    name: "TODO: AI providers",
+    name: "Amazon Web Services",
     purpose:
-      "TODO: name each model provider used across the products (for example Anthropic or OpenAI) and confirm each one's zero-retention / no-training terms.",
+      "Transactional email via Amazon SES, and application infrastructure for ScanSafeguard.",
   },
   {
-    name: "TODO: email provider",
-    purpose: "TODO: name the transactional email provider used for account and support mail.",
+    name: "Anthropic (Claude)",
+    purpose: "AI model inference for AI-powered product features.",
+  },
+  {
+    name: "OpenAI",
+    purpose: "AI model inference for AI-powered product features.",
   },
 ];

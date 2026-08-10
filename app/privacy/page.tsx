@@ -176,15 +176,28 @@ const sections: readonly PolicySection[] = [
         <p>
           Some products send your content to AI model providers in order to
           generate output you requested — for example, analyzing scan results or
-          drafting resume content.
+          drafting resume content. We use{" "}
+          <strong>Anthropic (Claude)</strong> and <strong>OpenAI</strong> for
+          this.
+        </p>
+        <p>
+          <strong>We do not use your content to train AI models.</strong>{" "}
+          Neither provider trains on content submitted through their commercial
+          APIs by default, and we do not opt in to any feedback or
+          data-sharing program that would permit it.
+        </p>
+        <p>
+          Providers may retain content briefly to monitor for abuse before
+          deleting it. OpenAI&rsquo;s default abuse-monitoring window is 30
+          days.
         </p>
         <ReviewNote>
-          State the training position explicitly once it is confirmed with each
-          vendor. The intended statement is: <em>we do not use your content to
-          train AI models, and our model providers are contractually prohibited
-          from training on content submitted through our products.</em> Confirm
-          the zero-retention / no-training terms for every provider in the
-          subprocessor list before publishing this.
+          Two things to close before publishing: confirm Anthropic&rsquo;s
+          retention window rather than leaving it unstated, and consider
+          requesting Zero Data Retention from both providers. OpenAI offers it
+          on approval through sales. ScanSafeguard findings and
+          MyAwesomeResume content are the most sensitive data we send to a
+          model, so they are the strongest case for it.
         </ReviewNote>
       </>
     ),
@@ -264,9 +277,10 @@ const sections: readonly PolicySection[] = [
           </table>
         </div>
         <ReviewNote>
-          Two rows above are unresolved. Naming every provider is what security
-          reviewers and enterprise buyers check for, so complete the list before
-          publishing.
+          Confirm the hosting split before publishing: ScanSafeguard is
+          described as running on AWS while this site runs on Vercel. The table
+          should say which products sit where rather than listing both
+          generically.
         </ReviewNote>
       </>
     ),

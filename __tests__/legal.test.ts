@@ -38,8 +38,11 @@ describe("legal pages", () => {
       allowed: ["ScanSafeguard", "SellAvant"], // #authorized-testing, #third-party
     },
     {
+      // #retention names SellAvant for the Amazon buyer PII carve-out. The
+      // other two appear only inside ReviewNote callouts and should drop off
+      // this list once those are resolved.
       path: "app/privacy/page.tsx",
-      allowed: ["SellAvant"], // #retention — Amazon buyer PII carve-out
+      allowed: ["SellAvant", "ScanSafeguard", "MyAwesomeResume"],
     },
     { path: "app/page.tsx", allowed: [] },
     { path: "app/legal/page.tsx", allowed: [] },
