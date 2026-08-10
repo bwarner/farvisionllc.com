@@ -1,26 +1,39 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PolicyStyles from "../policy-styles";
+import {
+  COMPANY,
+  POLICY_EFFECTIVE_ISO,
+  POLICY_EFFECTIVE_LABEL,
+  POLICY_VERSION,
+  PRODUCTS,
+  productList,
+} from "../lib/legal";
 
 export const metadata: Metadata = {
   title: "Legal",
-  description:
-    "Terms of Service and Privacy Policy for Farvision LLC products: SellAvant, ScanSafeguard, and MyAwesomeResume.",
+  description: `Terms of Service, Privacy Policy, and Refund Policy for ${COMPANY.legalName} products: ${productList()}.`,
+  alternates: { canonical: "/legal" },
   robots: { index: true, follow: true },
 };
 
-const products = [
+const policies = [
   {
-    name: "SellAvant",
-    description: "Sales and commerce automation software.",
+    href: "/terms",
+    name: "Terms of Service",
+    description:
+      "The master agreement. Governs billing, renewals, warranties, liability, and governing law for every product.",
   },
   {
-    name: "ScanSafeguard",
-    description: "AI-powered security scanning.",
+    href: "/privacy",
+    name: "Privacy Policy",
+    description:
+      "How we collect, use, share, and retain information across all products.",
   },
   {
-    name: "MyAwesomeResume",
-    description: "AI-powered resume management.",
+    href: "/refunds",
+    name: "Refund Policy",
+    description: "Cancellations, refund eligibility, and how refunds are paid.",
   },
 ] as const;
 
@@ -32,42 +45,81 @@ export default function LegalPage() {
         <div className="policy-container">
           <p className="policy-breadcrumb">
             <Link href="/" className="policy-link">
-              Farvision LLC
+              {COMPANY.legalName}
             </Link>{" "}
             / Legal
           </p>
           <h1>Legal</h1>
           <p className="policy-lead">
-            Farvision LLC provides company-level legal policies for SellAvant,
-            ScanSafeguard, and MyAwesomeResume.
+            {COMPANY.legalName} is the provider and merchant of record for{" "}
+            {productList()}. These company-level policies govern all of them.
+          </p>
+          <p className="policy-meta">
+            <strong>Version {POLICY_VERSION}</strong> &middot; Effective{" "}
+            <time dateTime={POLICY_EFFECTIVE_ISO}>{POLICY_EFFECTIVE_LABEL}</time>
           </p>
 
-          <section className="policy-section">
-            <h2>Policies</h2>
-            <div className="policy-actions">
-              <Link href="/terms" className="policy-link">
-                Terms of Service
-              </Link>
-              <Link href="/privacy" className="policy-link">
-                Privacy Policy
-              </Link>
-            </div>
-          </section>
-
-          <h2 className="policy-heading">Covered products</h2>
+          <h2 className="policy-heading">Company policies</h2>
           <ul className="policy-list">
-            {products.map((product) => (
+            {policies.map((policy) => (
+              <li key={policy.href} className="policy-section">
+                <h2>
+                  <Link href={policy.href} className="policy-link">
+                    {policy.name}
+                  </Link>
+                </h2>
+                <p>{policy.description}</p>
+              </li>
+            ))}
+          </ul>
+
+          <h2 className="policy-heading">Products and supplemental terms</h2>
+          <p>
+            Each product may publish supplemental terms and a privacy notice
+            covering that product&rsquo;s features. Those documents apply in
+            addition to the company policies above, which control in the event
+            of a conflict.
+          </p>
+          <ul className="policy-list">
+            {PRODUCTS.map((product) => (
               <li key={product.name} className="policy-section">
-                <h2>{product.name}</h2>
+                <h2>
+                  <a
+                    href={product.url}
+                    className="policy-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {product.name}
+                  </a>
+                </h2>
                 <p>{product.description}</p>
+                <p className="policy-actions">
+                  <a
+                    href={product.termsUrl}
+                    className="policy-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Supplemental terms
+                  </a>
+                  <a
+                    href={product.privacyUrl}
+                    className="policy-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Privacy notice
+                  </a>
+                </p>
               </li>
             ))}
           </ul>
 
           <p className="policy-note">
             Questions? Contact{" "}
-            <a href="mailto:info@farvisionllc.com" className="policy-link">
-              info@farvisionllc.com
+            <a href={`mailto:${COMPANY.email}`} className="policy-link">
+              {COMPANY.email}
             </a>
             .
           </p>
