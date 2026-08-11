@@ -1,0 +1,187 @@
+/**
+ * Single source of truth for company identity, the product list, and policy
+ * versioning. /terms, /privacy, /refunds and /legal all read from here, so
+ * adding a product means editing one file instead of four pages.
+ */
+
+/**
+ * Values that still need counsel's input are written as `TODO: ...` and
+ * rendered inside a visible review callout so they cannot ship unnoticed.
+ * `__tests__/legal.test.ts` fails once POLICY_STATUS flips to "published"
+ * while any placeholder remains.
+ */
+export const PLACEHOLDER_PREFIX = "TODO:";
+
+export const POLICY_STATUS: "draft" | "published" = "draft";
+
+/** Bumped whenever a substantive change is made. Recorded at signup alongside
+ *  the acceptance timestamp so we can prove which version a user agreed to. */
+export const POLICY_VERSION = "2.0";
+export const POLICY_EFFECTIVE_ISO = "2026-08-10";
+export const POLICY_EFFECTIVE_LABEL = "August 10, 2026";
+
+export const COMPANY = {
+  legalName: "Farvision LLC",
+  shortName: "Farvision",
+  site: "https://farvisionllc.com",
+  email: "info@farvisionllc.com",
+  /** Must match the Stripe account's statement descriptor exactly. */
+  statementDescriptor: "FARVISION LLC",
+  formationState: "California",
+  mailingAddress: "1422 14th Ave, San Francisco, CA 94122",
+  governingLaw: "the State of California",
+  venue: "San Francisco County, California",
+  /** Arbitration provider and seat. See /terms#disputes. */
+  arbitrationProvider: "the American Arbitration Association",
+  /** Window to opt out of arbitration, measured from first acceptance.
+   *  An opt-out materially strengthens enforceability. */
+  arbitrationOptOutDays: 30,
+  /**
+   * Geographic availability drives the GDPR sections of the privacy policy.
+   * The software products are unrestricted, so GDPR can apply to them; the
+   * store deliberately does not sell into the EEA or UK.
+   */
+  softwareGeoRestriction: "none",
+  commerceGeoRestriction: "does not sell or ship to the EEA or UK",
+} as const;
+
+/**
+ * SellAvant connects to Amazon Seller Central via the Selling Partner API,
+ * which subjects us to Amazon's Data Protection Policy. Its requirements are
+ * stricter than our general retention schedule, so /privacy#retention carries
+ * a carve-out. The single question that decides how much of the DPP applies is
+ * whether we ingest buyer PII at all.
+ *
+ * @see https://developer-docs.amazon.com/sp-api/docs/security-compliance-overview
+ */
+export const AMAZON_DPP = {
+  /** PII from orders: no longer than 30 days after order delivery, unless a
+   *  law (tax, regulatory) requires longer and only for that purpose. */
+  piiRetentionDays: 30,
+  /** Security incidents must be reported to security@amazon.com. */
+  incidentNotificationHours: 24,
+  /** Logs must exclude PII and be retained at least this long. */
+  logRetentionMinimumDays: 90,
+  /**
+   * SellAvant does not ingest buyer PII — no names, shipping addresses, or
+   * phone numbers from order or report endpoints. That keeps us out of the
+   * strictest part of the policy.
+   *
+   * If this ever changes, the 30-day deletion obligation above starts
+   * applying and /privacy#retention must change with it. Treat flipping this
+   * to true as a compliance change, not a feature flag.
+   */
+  ingestsBuyerPii: false,
+} as const;
+
+export type Product = {
+  name: string;
+  description: string;
+  url: string;
+  termsUrl: string;
+  privacyUrl: string;
+  /** Product-specific data categories, shown in the privacy policy table. */
+  data: string;
+};
+
+export const PRODUCTS: readonly Product[] = [
+  {
+    name: "SellAvant",
+    description: "Selling assistant for Amazon sellers.",
+    url: "https://sellavant.com",
+    termsUrl: "https://sellavant.com/terms",
+    privacyUrl: "https://sellavant.com/privacy",
+    data: "Amazon Seller Central connection and authorization tokens, listings, inventory, pricing, order and settlement data, advertising and performance metrics, and account information. SellAvant does not ingest buyer personal information such as names, shipping addresses, or phone numbers.",
+  },
+  {
+    name: "ScanSafeguard",
+    description: "AI-powered security scanning.",
+    url: "https://scansafeguard.com",
+    termsUrl: "https://scansafeguard.com/terms",
+    privacyUrl: "https://scansafeguard.com/privacy",
+    data: "Scan targets you supply, scan configuration, scan results and findings, and account information.",
+  },
+  {
+    name: "MyAwesomeResume",
+    description: "AI-powered resume management.",
+    url: "https://myawesomeresume.com",
+    termsUrl: "https://myawesomeresume.com/terms",
+    privacyUrl: "https://myawesomeresume.com/privacy",
+    data: "Resume content, career and employment history you enter, generated documents, and account information.",
+  },
+] as const;
+
+/**
+ * Direct-to-consumer commerce brands operated by Farvision LLC. Deliberately
+ * separate from PRODUCTS: selling physical goods to consumers carries terms
+ * the software master agreement does not have (shipping, title and risk of
+ * loss, returns, food labeling), and it bills through a different processor.
+ * The company Privacy Policy covers these; the company Terms of Service does
+ * not — see the store's own policies.
+ */
+export type Store = {
+  name: string;
+  tagline: string;
+  description: string;
+  url: string;
+  platform: string;
+  paymentProcessor: string;
+  statementDescriptor: string;
+  data: string;
+};
+
+export const STORES: readonly Store[] = [
+  {
+    name: "Filtered Blend",
+    tagline: "Passionate Coffee Enthusiasts",
+    description: "Specialty coffee and drinkware, sold direct and on Amazon.",
+    url: "https://www.filteredblend.com",
+    platform: "Shopify",
+    paymentProcessor: "Shopify Payments",
+    /**
+     * Note the mismatch: customers buy from "Filtered Blend" but the card
+     * statement reads "Farvision". Unrecognized descriptors are a leading
+     * cause of friendly-fraud chargebacks, so the store policies call this
+     * out explicitly until the descriptor is changed in Shopify.
+     */
+    statementDescriptor: "FARVISION",
+    data: "Order contents, shipping and billing address, contact details, delivery status, and payment status. Card details are handled by Shopify Payments and never reach our systems.",
+  },
+] as const;
+
+export const PRODUCT_NAMES = PRODUCTS.map((product) => product.name);
+
+/** "SellAvant, ScanSafeguard, and MyAwesomeResume" */
+export const productList = (conjunction: "and" | "or" = "and") => {
+  const names = PRODUCT_NAMES;
+  if (names.length < 3) return names.join(` ${conjunction} `);
+  return `${names.slice(0, -1).join(", ")}, ${conjunction} ${names[names.length - 1]}`;
+};
+
+/**
+ * Named subprocessors, disclosed in the privacy policy. Keep this list
+ * accurate — it is the list customers and their security reviewers rely on.
+ */
+export const SUBPROCESSORS: readonly { name: string; purpose: string }[] = [
+  { name: "Stripe", purpose: "Payment processing, subscription billing, and invoicing for the software products." },
+  {
+    name: "Shopify",
+    purpose:
+      "Storefront, order management, and payment processing (Shopify Payments) for Filtered Blend.",
+  },
+  { name: "Vercel", purpose: "Application hosting and content delivery." },
+  { name: "PostHog", purpose: "Product analytics and usage measurement." },
+  {
+    name: "Amazon Web Services",
+    purpose:
+      "Transactional email via Amazon SES, and application infrastructure for ScanSafeguard.",
+  },
+  {
+    name: "Anthropic (Claude)",
+    purpose: "AI model inference for AI-powered product features.",
+  },
+  {
+    name: "OpenAI",
+    purpose: "AI model inference for AI-powered product features.",
+  },
+];

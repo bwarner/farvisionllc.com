@@ -127,6 +127,133 @@ body:has(.policy-page) {
   font-size: 0.95rem !important;
 }
 
+.policy-meta {
+  margin-bottom: 2.5rem !important;
+  color: #64748b !important;
+  font-size: 0.9rem !important;
+}
+
+.policy-meta strong {
+  color: #172033;
+}
+
+.policy-toc {
+  margin-bottom: 2.5rem;
+  border: 1px solid #dbe1ea;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.policy-toc h2 {
+  font-size: 1.15rem !important;
+}
+
+.policy-toc ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #4a5568;
+  font-size: 0.95rem;
+  line-height: 1.9;
+}
+
+@media screen and (min-width: 737px) {
+  .policy-toc ol {
+    columns: 2;
+    column-gap: 2rem;
+  }
+
+  .policy-toc li {
+    break-inside: avoid;
+  }
+}
+
+.policy-page :target {
+  scroll-margin-top: 1.5rem;
+}
+
+.policy-anchor {
+  color: inherit;
+  text-decoration: none;
+  border: 0;
+}
+
+.policy-anchor:hover {
+  color: #1d4ed8;
+}
+
+.policy-anchor:hover::after {
+  content: " #";
+  color: #94a3b8;
+}
+
+/* Internal drafting marker. Hidden in production — see ReviewNote. */
+.policy-review {
+  border-left: 3px solid #d97706;
+  background: #fffbeb;
+  border-radius: 0 6px 6px 0;
+  padding: 0.85rem 1rem;
+  color: #7c2d12 !important;
+  font-size: 0.92rem !important;
+}
+
+.policy-review strong {
+  color: #9a3412;
+}
+
+/* Customer-facing legal notice, e.g. the arbitration disclosure. Always
+   visible, and kept separate from .policy-review so restyling or hiding the
+   drafting markers can never affect a disclosure that must stay conspicuous. */
+.policy-notice {
+  border-left: 3px solid #1d4ed8;
+  background: #eff6ff;
+  border-radius: 0 6px 6px 0;
+  padding: 0.85rem 1rem;
+  color: #1e3a5f !important;
+  font-size: 0.95rem !important;
+}
+
+.policy-notice strong {
+  color: #172033;
+}
+
+.policy-table-wrap {
+  overflow-x: auto;
+}
+
+.policy-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  text-align: left;
+}
+
+.policy-table th,
+.policy-table td {
+  border-bottom: 1px solid #dbe1ea;
+  padding: 0.65rem 0.75rem;
+  vertical-align: top;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.policy-table th {
+  color: #172033;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.policy-bullets {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+  color: #4a5568;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.policy-bullets li {
+  margin-bottom: 0.4rem;
+}
+
 @media screen and (max-width: 736px) {
   .policy-page {
     padding: 3rem 1.25rem;
