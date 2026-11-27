@@ -1,11 +1,16 @@
 import React from "react";
-import Menu from "./menu";
+import Menu, { type MenuEntry } from "./menu";
 
-const Sidebar: React.FC = () => (
+interface SidebarProps {
+  items?: MenuEntry[];
+  defaultHash?: string;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ items, defaultHash }) => (
   <section id="sidebar">
     <div className="inner">
       <nav>
-        <Menu />
+        <Menu items={items} defaultHash={defaultHash} />
       </nav>
     </div>
   </section>

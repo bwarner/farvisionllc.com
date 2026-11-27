@@ -95,4 +95,39 @@ describe("sendContact", () => {
       })
     );
   });
+
+  it("labels e-commerce inquiries in the subject", async () => {
+    const { default: sendMail } = await import("@/app/lib/mail");
+
+    const result = await sendContact({ ...validState, topic: "ecommerce" });
+
+    expect(result.success).toBe(true);
+    expect(result.topic).toBe("ecommerce");
+    expect(sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        subject: "E-commerce inquiry from Test User",
+      })
+    );
+  });
+
+  it("uses the general subject when no topic is given", async () => {
+    const { default: sendMail } = await import("@/app/lib/mail");
+
+    await sendContact(validState);
+
+    expect(sendMail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        subject: "Contact form submission from Test User",
+      })
+    );
+  });
+
+  it("rejects an unknown topic", async () => {
+    const result = await sendContact({
+      ...validState,
+      topic: "spam" as never,
+    });
+
+    expect(result.success).toBe(false);
+  });
 });

@@ -13,8 +13,19 @@ const initialState: ContactFormState = {
   error: null,
 };
 
-const ContactForm: React.FC = () => {
-  const [state, setState] = useState<ContactFormState>(initialState);
+interface ContactFormProps {
+  topic?: ContactFormState["topic"];
+  messagePlaceholder?: string;
+}
+
+const ContactForm: React.FC<ContactFormProps> = ({
+  topic = "general",
+  messagePlaceholder,
+}) => {
+  const [state, setState] = useState<ContactFormState>({
+    ...initialState,
+    topic,
+  });
   const [pending, setPending] = useState(false);
 
   const handleChange = (
@@ -30,14 +41,15 @@ const ContactForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPending(true);
-    posthog.capture("contact_form_submitted");
+    posthog.capture("contact_form_submitted", { topic });
     try {
       const updatedState = await sendContact(state);
       setState(updatedState);
       if (updatedState.success) {
-        posthog.capture("contact_form_success");
+        posthog.capture("contact_form_success", { topic });
       } else {
         posthog.capture("contact_form_error", {
+          topic,
           error_type: updatedState.errors ? "validation" : "server",
           field_count: updatedState.errors
             ? Object.keys(updatedState.errors.fieldErrors || {}).filter(
@@ -129,6 +141,7 @@ const ContactForm: React.FC = () => {
               name="message"
               id="message"
               rows={5}
+              placeholder={messagePlaceholder}
               value={state.message}
               onChange={handleChange}
             ></textarea>
