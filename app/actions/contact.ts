@@ -23,6 +23,8 @@ const ContactFormStateSchema = z.object({
     .min(1, "Message is required")
     .min(10, "Message must be at least 10 characters"),
   company: z.string().optional(),
+  /** Which page the form was sent from; routes the subject line. */
+  topic: z.enum(["general", "ecommerce"]).optional(),
   success: z.boolean().nullable(),
   error: z.string().nullable(),
   errors: z
@@ -44,12 +46,12 @@ export async function sendContact(
 ): Promise<ContactFormState> {
   try {
     const formData = ContactFormStateSchema.parse(state);
-    const { name, email, message, company } = formData;
+    const { name, email, message, company, topic } = formData;
 
     // Honeypot check — bots fill hidden fields
     if (company) {
       // Silently succeed to not tip off the bot
-      return { name, email, message, success: true, error: null };
+      return { name, email, message, topic, success: true, error: null };
     }
 
     // Rate limiting by email
@@ -69,12 +71,15 @@ export async function sendContact(
     const result = await sendMail({
       replyTo: email,
       to: contactToAddress,
-      subject: `Contact form submission from ${sanitizedName}`,
+      subject:
+        topic === "ecommerce"
+          ? `E-commerce inquiry from ${sanitizedName}`
+          : `Contact form submission from ${sanitizedName}`,
       body: message,
     });
 
     if (result) {
-      return { name, email, message, success: true, error: null };
+      return { name, email, message, topic, success: true, error: null };
     }
 
     return { ...state, success: false, error: "Failed to send message" };

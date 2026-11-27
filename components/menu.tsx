@@ -1,22 +1,37 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 import MenuItem from "./menu-item";
 
-const menuItems = [
+export interface MenuEntry {
+  /** A same-page hash ("#contact") or a route ("/ecommerce"). */
+  id: string;
+  name: string;
+}
+
+export const HOME_MENU: MenuEntry[] = [
   { id: "#intro", name: "Welcome" },
   { id: "#products", name: "Products" },
+  { id: "/ecommerce", name: "E-commerce" },
   { id: "#contact", name: "Contact" },
 ];
 
-const Menu: React.FC = () => {
+interface MenuProps {
+  items?: MenuEntry[];
+  /** Hash treated as current when the URL has none. */
+  defaultHash?: string;
+}
+
+const Menu: React.FC<MenuProps> = ({
+  items = HOME_MENU,
+  defaultHash = "#intro",
+}) => {
   const [currentHash, setCurrentHash] = useState<string>("");
-  const [selectedItem, setSelectedItem] = useState<string>("");
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      setCurrentHash(hash || "#intro");
+      setCurrentHash(hash || defaultHash);
     };
     // Listen for hash changes
     window.addEventListener("hashchange", handleHashChange);
@@ -27,11 +42,11 @@ const Menu: React.FC = () => {
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
     };
-  }, []);
+  }, [defaultHash]);
 
   return (
     <ul>
-      {menuItems.map((item, i) => (
+      {items.map((item) => (
         <MenuItem
           key={item.id}
           href={item.id}

@@ -32,6 +32,11 @@ const IntroSection: React.FC<IntroSectionProps> = ({ className }) => {
               Learn more
             </a>
           </li>
+          <li>
+            <a href="/ecommerce" className="button">
+              E-commerce setup
+            </a>
+          </li>
         </ul>
       </div>
     </section>
